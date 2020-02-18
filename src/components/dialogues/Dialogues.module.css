@@ -1,0 +1,9 @@
+.dialoguesWrap{
+    background-color: darkred;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialoguesUserName{
+    display: flex;
+    flex-direction: column;
+}

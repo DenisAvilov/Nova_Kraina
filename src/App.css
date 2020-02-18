@@ -1,0 +1,24 @@
+body{
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+a{
+    text-decoration: none;
+    color: #CC99FF;    
+}
+a:hover{
+    color:white;
+    transition: color .5s ease;
+}
+.grid{
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas:  
+                        "h h"
+                        "n p"
+                        "f f" 
+    ;
+
+}
+
