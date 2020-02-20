@@ -1,26 +1,40 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, BrowserRouter } from "react-router-dom";
 import './App.css';
-import Profile from './components/profile/Profile';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+
 import Header from './components/header/Header';
-import Nav from './components/nav/Nav';
-import Footer from './components/footer/Footer';
-import Videos from './components/videos/Videos';
-import Groups from './components/groups/Groups';
+import AsideLeft from './components/asideLeft/AsideLeft';
+import AsideRight from './components/asideRight/AsideRight';
+import Profile from './components/profile/Profile';
 import Music from './components/music/Music';
 import Dialogues from './components/dialogues/Dialogues';
+import Video from './components/video/Video';
+import Main from './components/main/Main';
+import Friends from './components/friends/Friends';
+
+
+library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker)
 
 const App = () => {
   return (<BrowserRouter>
     <div className="grid">
       <Header />
-      <Nav />
-      <Route path='/profile' component={Profile} />
-      <Route path='/dialogues' component={Dialogues} />
-      <Route path='/videos' component={Videos} />
-      <Route path='/groups' component={Groups} />
-      <Route path='/music' component={Music} />
-      <Footer />
+      <AsideLeft />
+      <AsideRight />
+      <Main />
+      {/* <Profile /> */}
+      {/* <Dialogues />
+      <Video />
+      <Music /> */}
+      <Route path='/profile' render={() => <Profile />} />
+      <Route path='/friends' render={() => <Friends /> } />
+      <Route path='/dialogues' render={() =>  <Dialogues /> } />
+      <Route path='/video' render={() =>  <Video /> } />
+      <Route path='/music' render={() =>  <Music /> } />  
+
     </div>
   </BrowserRouter>
 

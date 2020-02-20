@@ -1,3 +1,4 @@
-.musicWrap{
-    background-color: darkorange;
+.wrap{
+    border: 1px solid #fff;
+    grid-area: m;
 }

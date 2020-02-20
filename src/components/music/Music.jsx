@@ -3,10 +3,8 @@ import d from './Music.module.css';
 
 const Music = () =>{
     return (
-        <div className={d.musicWrap}>
-            Musuc
-        </div>
-    );
-};
+        <div className={d.wrap}>Music</div>
+    )
+}
 
 export default Music;

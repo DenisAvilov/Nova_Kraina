@@ -1,9 +1,6 @@
-.header{
-    background: linear-gradient(145deg, #8a00e6, #a400ff);
-    height: auto;
-    position: relative;
+.wrap{
+    border: 1px solid #fff;
     grid-area: h;
+    
+    background-color: #18191a;
 }
-
-
-
