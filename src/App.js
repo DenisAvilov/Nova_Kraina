@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, BrowserRouter } from "react-router-dom"
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 import Header from './components/header/Header';
 import AsideLeft from './components/asideLeft/AsideLeft';
@@ -16,7 +16,7 @@ import Main from './components/main/Main';
 import Friends from './components/friends/Friends';
 
 
-library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker)
+library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
 const App = () => {
   return (<BrowserRouter>

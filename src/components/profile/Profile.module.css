@@ -1,21 +1,20 @@
 .wrap{
-    border: 1px solid #fff;
+    /* border: 1px solid #fff;  */
     grid-area: m;
-   /*  display: grid;
+    display: grid;
     grid-template-columns: 1fr 1fr ;
-    grid-template-rows: 1fr 50px 100px  200px;
-    grid-auto-rows: 200px;
+    grid-template-rows: 1fr 50px auto ;    
     grid-template-areas:
         "he he"
         "nav nav"
-        "state new"
-        "state posts"
-    ; */
+        "s s"      
+    ; 
     
 }
 .header{
     position: relative;
-    margin-bottom: 100px;    
+    margin-bottom: 100px;  
+    grid-area: he;  
 }
 
 .header_bg_logo img{
@@ -82,6 +81,7 @@
     margin-bottom: 5px;
     align-items: center;
     padding: 0 10px;
+    grid-area: nav;
    
 }
 .nav:after{
@@ -129,16 +129,17 @@
 
 .wrapper_state{
     position: relative;
-    display: grid;  
+    grid-area: s;
+    display: grid;
     padding: 0 10px;
     grid-gap: 15px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50px 150px ;
+    grid-template-rows: 50px 150px 1rf;
     grid-template-areas:        
         "state new"
-        "state posts"
+        "posts posts"
+       
     ;
-
 }
 
 .state{   
@@ -179,17 +180,144 @@
     padding-left: 0;
 }
 
-.new_news{
+.your_news{
     grid-area: new;
-    background-color: blueviolet;
-  
+    background-color: #242526;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    /* margin-bottom: 15px; */
 }
+.your_user_logo{
+    border-radius: 50%;
+    background-color: black;
+  }
+.your_user_logo img{
+     object-fit: fill;
+     height: 36px;
+     width: 36px;
+     border-radius: 50%;
+  }
+.write_news{
+    flex-grow: 1;
+    margin-left: 15px;
+    display: flex;
 
+}
+.write_news textarea, .write_news input{
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: rgba(206, 206, 206, 0.1);
+    color:#dddddd;
+}
+.write_news textarea{
+  flex-grow: 1;
+  margin-right: 10px;
+  resize: none;  
+  padding: 6px 0 6px 6px;  
+}
+.write_news textarea:active,.write_news textarea:focus{
+  background-color: rgba(206, 206, 206, 0.2);
+  transition: background-color .3s ease;
+}
+.write_news input:hover{
+  cursor: pointer;
+  background-color: rgba(206, 206, 206, 0.2);
+  transition: background-color .3s ease;
+}
 .posts{
     grid-area: posts;
-    background-color: cornsilk;
+    background-color: inherit;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 15px;
+    padding-bottom: 50px;
 }
 .post{
+    height: 505px;
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 50px;
+    background: #242526;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.post_title{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    padding: 15px;
+}
+.post_logo{
+    border-radius: 50%;
+    background-color: black;
+}
+.post_logo img{
+    object-fit: fill;
+    height: 36px;
+    width: 36px;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+.post_user_name{
+    margin-left: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+.post_content_title{
+    font-size: 1.2em;
+    height: 25px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.post_content figure{
+    height: 290px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.post_content figure img{
+    object-fit: fill;
+    height: 290px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.post_content span{
+    padding: 0 15px 0 15px;
+    display: block;
     
-    background-color: crimson;
+}
+.post_content_text{
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+.post_content_like {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    align-self: center;
+    padding: 3px 15px;
+    margin-bottom: 3px;
+}
+.post_content_like span{
+    padding: 13px 15px; 
+    display: block;   
+    border-radius: 8px;
+    align-content: center;
+    align-self: center;
+    display: flex;
+    justify-content: start;
+    cursor: pointer;
+}
+.post_content_like span svg{
+   margin-right: 10px;
+}
+.post_content_like span:hover{
+    background-color: rgba(206, 206, 206, 0.1);
+    transition: background-color .3s ease;
 }
