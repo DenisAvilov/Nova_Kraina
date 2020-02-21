@@ -65,6 +65,8 @@
 .post_content_text {
     font-size: 1.2em;
     margin-bottom: 0;
+    height: 50px;
+    overflow: hidden;
 }
 
 .post_content_like {

@@ -11,11 +11,35 @@ let state = {
             user_avatar: "http://avilovdenis.pp.ua/img/2-mini-min.png",
             get user_avtar_alt() {
                 return this.name + " " + this.second_Name;
-            },
-
-
-
-        }]
+            }
+        }],
+        briefInformation :[{
+            id: 0,
+            h1: 'Краткая информация',
+            studied: 'National Aerospace University – Kharkov Aviation Institute',
+            lives: 'Харьков',
+            from: 'Харьков'
+        }],
+        post: [{
+            id: 0,
+            avatarImg: "http://avilovdenis.pp.ua/img/2-mini-min.png",
+            name: 'Никита',
+            secondName: 'Авилов',
+            title: 'Природа',
+            imgPost: "https://bipbap.ru/wp-content/uploads/2017/04/priroda_kartinki_foto_03.jpg",
+            like: 30,
+            massenge:'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов',
+        },
+        {
+            id: 1,
+            avatarImg: "https://www.pngkey.com/png/detail/47-474070_child-avatar-icon-flat-design-red-yellow-coffee.png",
+            name: 'Илья',
+            secondName: 'Авилов',
+            title: 'Львовское метро',
+            imgPost: "https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg",
+            like: 35,
+            massenge:'Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов',
+        }],
     }
 }
 
