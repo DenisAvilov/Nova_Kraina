@@ -1,0 +1,40 @@
+.state {
+    background-color: #242526;
+    border-radius: 8px;
+    grid-area: state;
+    padding: 20px 15px;
+}
+
+.state_item {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 15px;
+}
+
+.state_inform {
+    padding-left: 10px;
+}
+
+.state_item .map {
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+.state_item a {
+    /* color: #e4e6eb; */
+    color: #dddddd;
+    text-shadow: 0px 0px 1px #dddddd;
+}
+
+.state_item a:hover {
+    text-decoration: underline;
+}
+
+.state h1 {
+    font-size: 1.25rem;
+}
+
+.state ul {
+    list-style: none;
+    padding-left: 0;
+}

@@ -18,27 +18,26 @@ import Friends from './components/friends/Friends';
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
-const App = () => {
-  return (<BrowserRouter>
-    <div className="grid">
-      <Header />
-      <AsideLeft />
-      <AsideRight />
-      <Main />
-      {/* <Profile /> */}
-      {/* <Dialogues />
-      <Video />
-      <Music /> */}
-      <Route path='/profile' render={() => <Profile />} />
-      <Route path='/friends' render={() => <Friends /> } />
-      <Route path='/dialogues' render={() =>  <Dialogues /> } />
-      <Route path='/video' render={() =>  <Video /> } />
-      <Route path='/music' render={() =>  <Music /> } />  
+const App = (props) => {
+    return (< BrowserRouter >
+        <div className="grid" >
+            <Header />
+            <AsideLeft />
+            <AsideRight />
+            <Main /> { /* <Profile /> */} {
+                /* <Dialogues />
+                      <Video />
+                      <Music /> */
+            }
+            <Route path='/profile' render={() => < Profile state={props.state}/>} />
+            <Route path='/friends' render={() => < Friends />} />
+            <Route path='/dialogues'  render={() => < Dialogues />} />
+            <Route path='/video' render={() => < Video />}/>
+            <Route path='/music'render={() => < Music />}/>
 
-    </div>
-  </BrowserRouter>
-
-  );
-}
-
+            </div></BrowserRouter>
+    
+        );
+    }
+    
 export default App;

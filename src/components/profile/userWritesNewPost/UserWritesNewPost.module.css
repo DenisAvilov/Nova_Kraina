@@ -1,0 +1,55 @@
+.your_news {
+    grid-area: new;
+    background-color: #242526;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    /* margin-bottom: 15px; */
+}
+
+.your_user_logo {
+    border-radius: 50%;
+    background-color: black;
+}
+
+.your_user_logo img {
+    object-fit: fill;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+}
+
+.write_news {
+    flex-grow: 1;
+    margin-left: 15px;
+    display: flex;
+}
+
+.write_news textarea,
+.write_news input {
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: rgba(206, 206, 206, 0.1);
+    color: #dddddd;
+}
+
+.write_news textarea {
+    flex-grow: 1;
+    margin-right: 10px;
+    resize: none;
+    padding: 6px 0 6px 6px;
+}
+
+.write_news textarea:active,
+.write_news textarea:focus {
+    background-color: rgba(206, 206, 206, 0.2);
+    transition: background-color .3s ease;
+}
+
+.write_news input:hover {
+    cursor: pointer;
+    background-color: rgba(206, 206, 206, 0.2);
+    transition: background-color .3s ease;
+}
