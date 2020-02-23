@@ -39,11 +39,35 @@ let state = {
             imgPost: "https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg",
             like: 35,
             massenge:'Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов',
+        },
+        {
+            id: 2,
+            avatarImg: "https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-female-avatar-icon-png-image_4017527.jpg",
+            name: 'Оля',
+            secondName: 'Авилова',
+            title: 'Подсолники',
+            imgPost: "https://static2.gazeta.ua/img2/cache/gallery/923/923596_1_w_570.jpg?v=0",
+            like: 35,
+            massenge:'Новая статья про подсолнухи',
         }],
     }
 }
 
-
+export let addPost = (obj)=>{
+   
+    let newObj = {
+        id: 12,
+        avatarImg: "http://avilovdenis.pp.ua/img/2-mini-min.png",
+            name: 'Никита',
+            secondName: 'Авилов',
+            title: 'Природа',
+            imgPost: "https://bipbap.ru/wp-content/uploads/2017/04/priroda_kartinki_foto_03.jpg",
+            like: 30,
+            massenge: obj,
+    }
+    
+    state.profile.post.push(newObj);
+}
 
 
 

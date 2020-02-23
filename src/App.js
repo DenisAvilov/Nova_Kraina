@@ -14,6 +14,7 @@ import Dialogues from './components/dialogues/Dialogues';
 import Video from './components/video/Video';
 import Main from './components/main/Main';
 import Friends from './components/friends/Friends';
+import { addPost } from './redux/state';
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
@@ -29,7 +30,7 @@ const App = (props) => {
                       <Video />
                       <Music /> */
             }
-            <Route path='/profile' render={() => < Profile state={props.state}/>} />
+            <Route path='/profile' render={() => < Profile state={props.state} addPost={ props.addPost }/>} />
             <Route path='/friends' render={() => < Friends />} />
             <Route path='/dialogues'  render={() => < Dialogues />} />
             <Route path='/video' render={() => < Video />}/>

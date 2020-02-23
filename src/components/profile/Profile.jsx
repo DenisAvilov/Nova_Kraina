@@ -17,7 +17,7 @@ const Profile = (props) => {
         <UserNavigation />
         <div className={d.wrapper_state}>
             <UserState brief={props.state.profile.briefInformation} /> 
-            <UserWritesNewPost />
+            <UserWritesNewPost addPost={ props.addPost } />
             <div className={d.posts}>
                 {post}
             </div>

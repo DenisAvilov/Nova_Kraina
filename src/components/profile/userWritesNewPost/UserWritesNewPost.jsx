@@ -2,7 +2,17 @@ import React from 'react';
 import d from './UserWritesNewPost.module.css';
 
 
-const UserWritesNewPost = () => {
+const UserWritesNewPost = (props) => {
+  
+  let newTextUser = React.createRef();
+  
+  let addPost = ()=>{
+     let text = newTextUser.current.value;
+    
+     props.addPost(text)
+    newTextUser.current.value = '';
+    }
+
     return (
     <div className={d.new_news}>
         <div className={d.your_news}>
@@ -10,8 +20,8 @@ const UserWritesNewPost = () => {
                 <img src="http://avilovdenis.pp.ua/img/2-mini-min.png" alt="Avatar" />
             </div>
             <div className={d.write_news}>
-                <textarea name="your_new_news" id="your_new_news" cols="10" rows="1"></textarea>
-                <input type="submit" />
+                <textarea  ref={newTextUser} cols="10" rows="1"></textarea>
+                <input onClick={ () => { addPost() } } type="submit" />
             </div>
         </div>       </div>
     )
