@@ -1,3 +1,4 @@
+import {rerenderNewState} from '../rerender'; 
 let state = {
     profile: {
         user: [{
@@ -67,6 +68,7 @@ export let addPost = (obj)=>{
     }
     
     state.profile.post.push(newObj);
+    rerenderNewState(state);
 }
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -14,13 +14,13 @@ import Dialogues from './components/dialogues/Dialogues';
 import Video from './components/video/Video';
 import Main from './components/main/Main';
 import Friends from './components/friends/Friends';
-import { addPost } from './redux/state';
+
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
 const App = (props) => {
-    return (< BrowserRouter >
+    return (
         <div className="grid" >
             <Header />
             <AsideLeft />
@@ -36,8 +36,7 @@ const App = (props) => {
             <Route path='/video' render={() => < Video />}/>
             <Route path='/music'render={() => < Music />}/>
 
-            </div></BrowserRouter>
-    
+            </div>
         );
     }
     
