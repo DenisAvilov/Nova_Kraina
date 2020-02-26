@@ -2,24 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { addPost } from './redux/state';
-import state, { addNewPlaceholder, _crossdressing } from './redux/state';
+import store from './redux/state';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 
 
 export let renderState = (state) => {
-    ReactDOM.render(< BrowserRouter > < App state={state} addPost={addPost}
-        addNewPlaceholder={addNewPlaceholder}
+    ReactDOM.render(< BrowserRouter > < App 
+     state={store.getState()}
+     addPost={store.addPost.bind(store)}
+     addNewPlaceholder={store.addNewPlaceholder.bind(store)}
     /> </ BrowserRouter>, document.getElementById('root'));
 }
 
-_crossdressing(renderState)
+store._crossdressing(renderState)
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
 
-rerenderNewState(state);
+renderState();
 
