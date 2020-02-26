@@ -3,15 +3,19 @@ import d from './UserWritesNewPost.module.css';
 
 
 const UserWritesNewPost = (props) => {
-  
-  let newTextUser = React.createRef();
-  
-  let addPost = ()=>{
-     let text = newTextUser.current.value;
     
-     props.addPost(text)
-    newTextUser.current.value = '';
+  let newTextUser = React.createRef();  
+  let ckickButton = ()=>{  
+    
+     //props.addPost()    
+     props.dispatch({ type : 'ADD-POST'})  
     }
+  let changePlaceholder = () => {
+ 
+     let text = newTextUser.current.value;
+     let action = {type : 'ADD-NEW-PLACE-HOLDER', text: text};
+     props.dispatch(action);
+  }
 
     return (
     <div className={d.new_news}>
@@ -20,8 +24,10 @@ const UserWritesNewPost = (props) => {
                 <img src="http://avilovdenis.pp.ua/img/2-mini-min.png" alt="Avatar" />
             </div>
             <div className={d.write_news}>
-                <textarea  ref={newTextUser} cols="10" rows="1"></textarea>
-                <input onClick={ () => { addPost() } } type="submit" />
+                
+                <textarea onChange={changePlaceholder} ref={newTextUser} cols="10" rows="1"
+                 value={props.placeholder}></textarea>
+                <input onClick={ () => { ckickButton() } } type="submit" />
             </div>
         </div>       </div>
     )

@@ -20,6 +20,7 @@ import Friends from './components/friends/Friends';
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
 const App = (props) => {
+    
     return (
         <div className="grid" >
             <Header />
@@ -30,7 +31,9 @@ const App = (props) => {
                       <Video />
                       <Music /> */
             }
-            <Route path='/profile' render={() => < Profile state={props.state} addPost={ props.addPost }/>} />
+            <Route path='/profile' render={() => < Profile state={props.state} 
+            dispatch={props.dispatch}
+            />} />
             <Route path='/friends' render={() => < Friends />} />
             <Route path='/dialogues'  render={() => < Dialogues />} />
             <Route path='/video' render={() => < Video />}/>

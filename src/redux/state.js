@@ -54,19 +54,18 @@
             placeholder: 'Напишите что-нибудь'
         }
     },
+    _crossdressing(listener){
+        this._subscriber = listener;
+     },
+     _subscriber(){
+     
+    },
     getState(){
         return this._state;
     },
-    _subscriber(){
-     
-    },
-    addNewPlaceholder(e){
-       debugger; 
-       this._state.profile.placeholder = e
-       this._subscriber(this._state);
-    },
-    addPost(){
-        debugger;
+    dispatch(action){ //{type : 'ADD-POST'}
+ 
+     if( action.type === 'ADD-POST'){       
         let newObj = {
             id: 12,
             avatarImg: "http://avilovdenis.pp.ua/img/2-mini-min.png",
@@ -76,15 +75,19 @@
             imgPost: "https://bipbap.ru/wp-content/uploads/2017/04/priroda_kartinki_foto_03.jpg",
             like: 30,
             massenge: this._state.profile.placeholder,
-        }
-    
+        }    
        this._state.profile.post.push(newObj);
        this._state.profile.placeholder = "Напишите что еще!";
        this._subscriber(this._state);
-    },  
-    _crossdressing(listener){
-       this._subscriber = listener;
-    }
+     } else if( action.type === 'ADD-NEW-PLACE-HOLDER'){
+        this._state.profile.placeholder = action.text
+        this._subscriber(this._state);
+     }
+     
+    },
+       
+   
+  
  }
 
 export default store;

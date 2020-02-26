@@ -8,8 +8,9 @@ import Post from './post/Post';
 
 
 const Profile = (props) => {
-
-    const post = props.state.profile.post.map( p => <Post id={p.id} avatarImg={p.avatarImg} name={p.name} secondName={p.secondName} 
+    
+    const post = props.state.profile.post.map( p => <Post id={p.id} avatarImg={p.avatarImg}
+        name={p.name} secondName={p.secondName} 
         title={p.title} imgPost={p.imgPost} like={p.like} massenge={p.massenge}/>)
 
     return (<div className={d.wrap}>
@@ -17,7 +18,7 @@ const Profile = (props) => {
         <UserNavigation />
         <div className={d.wrapper_state}>
             <UserState brief={props.state.profile.briefInformation} /> 
-            <UserWritesNewPost addPost={ props.addPost } />
+            <UserWritesNewPost dispatch={props.dispatch} placeholder={props.state.profile.placeholder}/>
             <div className={d.posts}>
                 {post}
             </div>
