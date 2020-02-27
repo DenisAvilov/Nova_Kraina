@@ -1,3 +1,9 @@
+ const  ADD_POST = 'ADD-POST';
+ const ADD_NEW_PLACE_HOLDER = "ADD-NEW-PLACE-HOLDER";
+ 
+export let actionPlacholder = (text) => ({type : 'ADD-NEW-PLACE-HOLDER', text: text })
+export let actionAddPost = () =>({type : 'ADD-POST'})
+
  let store = {
     _state: {
         profile: {
@@ -65,7 +71,7 @@
     },
     dispatch(action){ //{type : 'ADD-POST'}
  
-     if( action.type === 'ADD-POST'){       
+     if( action.type === ADD_POST ){       
         let newObj = {
             id: 12,
             avatarImg: "http://avilovdenis.pp.ua/img/2-mini-min.png",
@@ -79,15 +85,13 @@
        this._state.profile.post.push(newObj);
        this._state.profile.placeholder = "Напишите что еще!";
        this._subscriber(this._state);
-     } else if( action.type === 'ADD-NEW-PLACE-HOLDER'){
+     } else if( action.type === ADD_NEW_PLACE_HOLDER ){
         this._state.profile.placeholder = action.text
         this._subscriber(this._state);
      }
      
     },
-       
-   
-  
- }
+    
+}
 
 export default store;

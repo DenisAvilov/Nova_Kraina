@@ -1,20 +1,19 @@
 import React from 'react';
 import d from './UserWritesNewPost.module.css';
+import { actionPlacholder, actionAddPost } from '../../../redux/state';
 
 
 const UserWritesNewPost = (props) => {
-    
+
   let newTextUser = React.createRef();  
-  let ckickButton = ()=>{  
-    
+  let ckickButton = ()=>{      
      //props.addPost()    
-     props.dispatch({ type : 'ADD-POST'})  
+     props.dispatch(actionAddPost())  
     }
-  let changePlaceholder = () => {
- 
-     let text = newTextUser.current.value;
-     let action = {type : 'ADD-NEW-PLACE-HOLDER', text: text};
-     props.dispatch(action);
+    
+  let changePlaceholder = () => { 
+     let text = newTextUser.current.value;     
+     props.dispatch(actionPlacholder(text));
   }
 
     return (
