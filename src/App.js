@@ -8,19 +8,19 @@ import { faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVid
 import Header from './components/header/Header';
 import AsideLeft from './components/asideLeft/AsideLeft';
 import AsideRight from './components/asideRight/AsideRight';
-import Profile from './components/profile/Profile';
 import Music from './components/music/Music';
 import Dialogues from './components/dialogues/Dialogues';
 import Video from './components/video/Video';
 import Main from './components/main/Main';
 import Friends from './components/friends/Friends';
+import ProfileConteiner from './components/profile/ProfileContainer';
 
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
 const App = (props) => {
-    
+   
     return (
         <div className="grid" >
             <Header />
@@ -31,7 +31,7 @@ const App = (props) => {
                       <Video />
                       <Music /> */
             }
-            <Route path='/profile' render={() => < Profile state={props.state} 
+            <Route path='/profile' render={() => <ProfileConteiner state={props.state} 
             dispatch={props.dispatch}
             />} />
             <Route path='/friends' render={() => < Friends />} />
