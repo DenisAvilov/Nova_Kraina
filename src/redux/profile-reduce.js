@@ -34,26 +34,7 @@ let store =  {
         like: 30,
         massenge: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов',
     },
-    {
-        id: 1,
-        avatarImg: "https://www.pngkey.com/png/detail/47-474070_child-avatar-icon-flat-design-red-yellow-coffee.png",
-        name: 'Илья',
-        secondName: 'Авилов',
-        title: 'Львовское метро',
-        imgPost: "https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg",
-        like: 35,
-        massenge: 'Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов',
-    },
-    {
-        id: 2,
-        avatarImg: "https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-female-avatar-icon-png-image_4017527.jpg",
-        name: 'Оля',
-        secondName: 'Авилова',
-        title: 'Подсолники',
-        imgPost: "https://static2.gazeta.ua/img2/cache/gallery/923/923596_1_w_570.jpg?v=0",
-        like: 35,
-        massenge: 'Новая статья про подсолнухи',
-    }],
+   ],
     placeholder: 'Напишите что-нибудь'
 } 
 

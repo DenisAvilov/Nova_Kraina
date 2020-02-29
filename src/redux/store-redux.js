@@ -9,3 +9,4 @@ let store = createStore(reducers);//создание объекта store
 export default store;
 
 
+ 
