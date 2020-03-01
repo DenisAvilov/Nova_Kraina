@@ -1,0 +1,62 @@
+.friends_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: space-between;
+    background-color: #242526;
+    padding: 10px;
+    border-radius: 8px;    
+    } 
+
+.friend{
+ display: flex;
+ align-items: center;
+ flex-grow: 1;
+ padding: 10px 10px;
+ border: 1px solid #202122;
+ margin: 10px;
+ border-radius: 10px;
+ background: linear-gradient(145deg, #202122, #272829);
+
+}
+.logo{
+ width: 80px;
+ height: 80px;
+ border-radius: 10px;
+ overflow: hidden;
+ border: 0 solid inherit;
+ cursor: pointer;
+ 
+}
+.logo img{
+    object-fit: fill;
+    width: 100%;
+}
+.user_name{
+margin-left: 10px;
+}
+.user_name h2{
+
+}
+.common_frien{
+display: block;
+font-size: 0.8em;
+
+}
+.common_frien span{
+    margin-right: 5px;
+}
+.button_friends{
+margin-left: auto;
+cursor: pointer;
+padding: 10px 20px;
+background-color: rgba(206, 206, 206, 0.1);
+color: #dddddd;
+border-radius: 8px;
+font-size: .9375rem;
+font-weight: 600;
+ }
+ .button_friends:hover{
+    background-color: rgba(206, 206, 206, 0.2);
+    transition: background-color .3s ease;
+ }

@@ -14,10 +14,12 @@ import Video from './components/video/Video';
 import Main from './components/main/Main';
 import Friends from './components/friends/Friends';
 import ProfileConteiner from './components/profile/ProfileContainer';
+import MyFriendsContainer from './components/profile/userNavigation/myFriends/MyFriendsContainer';
 
 
 
-library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
+library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
+     faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
 const App = (props) => {
    
@@ -31,13 +33,13 @@ const App = (props) => {
                       <Video />
                       <Music /> */
             }
-            <Route path='/profile' render={() => <ProfileConteiner state={props.state} 
-            dispatch={props.dispatch}
+            <Route path='/profile' render={() => <ProfileConteiner 
             />} />
             <Route path='/friends' render={() => < Friends />} />
             <Route path='/dialogues'  render={() => < Dialogues />} />
             <Route path='/video' render={() => < Video />}/>
             <Route path='/music'render={() => < Music />}/>
+            <Route path='/myfriends'render={() => < MyFriendsContainer />}/>
 
             </div>
         );

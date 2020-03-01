@@ -1,4 +1,5 @@
 import profile from "./profile-reduce";
+import myfriends from "./my-friends-reduce";
 
 
 
@@ -43,6 +44,13 @@ import profile from "./profile-reduce";
             },
           ],
             placeholder: 'Напишите что-нибудь'
+        },
+        myfriends: {
+            user:[{
+                id:0,
+                name: 'Юля', 
+                serName: 'Журавка'
+            }]
         }
     },
     subscribe(listener){
@@ -56,7 +64,8 @@ import profile from "./profile-reduce";
     },
     dispatch(action){ //{type : 'ADD-POST'} 
    
-    this._state.profile = profile ( this._state.profile, action);      
+    this._state.profile = profile ( this._state.profile, action); 
+    this._state.myfriends =  myfriends(this._state.myfriends)
     this._subscriber(this._state);
      
     },
