@@ -1,24 +1,44 @@
 import React from 'react';
 import Profile from './Profile';
-import { actionPlacholder, actionAddPost } from '../../redux/profile-reduce';
+import { addPlacholder, addPost, setUser } from '../../redux/profile-reduce';
+import { connect } from 'react-redux';
+import * as  axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
-const ProfileConteiner = (props) => {    
+class ProfileConteiner extends React.Component{
+    componentDidMount(){
+           let userProfileId = this.props.match.params.userId;
+          if(!userProfileId){
+             userProfileId = 2;
+           }
+        
+            debugger
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userProfileId)
+        .then( (response)=>{
   
-    let newTextUser = React.createRef();
+             this.props.setUser(response.data)  
+        } )
 
-    let addPost = () => {
-        debugger;
-        //props.addPost()       
-        props.dispatch(actionAddPost())
+    }
+
+    render(){   
+     return(
+         <>
+        <Profile
+         { ...this.props }
+
+        //   wrappedComponentRef={c => (this.Profile = c)}                
+        />
       
+     </>
+     ) 
     }
-
-    let upPlaceholder = (text) => {        
-        props.dispatch(actionPlacholder(text));
-    }
-
-
-    return ( <Profile profile={props.state} addPost={addPost}  upPlaceholder={upPlaceholder}/> )
 }
 
-export default ProfileConteiner;
+
+
+let  mapStateToProps = (state) => ( {  profile: state } )
+
+export default connect( mapStateToProps, {addPlacholder, addPost, setUser})(withRouter(ProfileConteiner))
+ 

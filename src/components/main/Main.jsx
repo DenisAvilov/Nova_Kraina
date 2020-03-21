@@ -3,7 +3,7 @@ import d from './Main.module.css';
 
 const Main = () =>{
     return (
-        <div className={d.wrap}></div>
+        <div className={d.wrap}>Стартовая страница</div>
     )
 }
 

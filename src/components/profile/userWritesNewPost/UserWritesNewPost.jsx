@@ -14,7 +14,7 @@ const UserWritesNewPost = (props) => {
 
     let changePlaceholder = () => {
         let text = newTextUser.current.value;
-        props.upPlaceholder(text)
+        props.addPlacholder(text)
         // props.dispatch(actionPlacholder(text));
     }
 
@@ -25,10 +25,9 @@ const UserWritesNewPost = (props) => {
                     <img src="http://avilovdenis.pp.ua/img/2-mini-min.png" alt="Avatar" />
                 </div>
                 <div className={d.write_news}>
-
                     <textarea onChange={changePlaceholder} ref={newTextUser} cols="10" rows="1"
                         value={props.placeholder}></textarea>
-                    <input onClick={() => { onAddPost() }} type="submit" />
+                    <input onClick={ onAddPost} type="submit" />
                 </div>
             </div>
         </div>

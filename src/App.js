@@ -12,37 +12,32 @@ import Music from './components/music/Music';
 import Dialogues from './components/dialogues/Dialogues';
 import Video from './components/video/Video';
 import Main from './components/main/Main';
-import Friends from './components/friends/Friends';
 import ProfileConteiner from './components/profile/ProfileContainer';
-import MyFriendsContainer from './components/profile/userNavigation/myFriends/MyFriendsContainer';
-
+import FriendsContainer from './components/friends/FriendsContainer';
+import MyFriendsContainer from'./components/myFriends/MyFriendsContainer';
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
      faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
-const App = (props) => {
+const App = () => {
    
     return (
         <div className="grid" >
             <Header />
             <AsideLeft />
             <AsideRight />
-            <Main /> { /* <Profile /> */} {
-                /* <Dialogues />
-                      <Video />
-                      <Music /> */
-            }
-            <Route path='/profile' render={() => <ProfileConteiner 
-            />} />
-            <Route path='/friends' render={() => < Friends />} />
+            <Route path='/main' render={() => <Main  />} />          
+            <Route path='/profile/:userId?' render={() => <ProfileConteiner  />} />
+            <Route path='/friends' render={() => < FriendsContainer />} /> 
             <Route path='/dialogues'  render={() => < Dialogues />} />
             <Route path='/video' render={() => < Video />}/>
             <Route path='/music'render={() => < Music />}/>
-            <Route path='/myfriends'render={() => < MyFriendsContainer />}/>
+            <Route path='/myfriends'render={() => < MyFriendsContainer />}/> 
 
             </div>
         );
     }
+    
     
 export default App;

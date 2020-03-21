@@ -9,7 +9,7 @@ const UserNavigation = () => {
             <div className={d.nav_info}>
                 <NavLink to="/">Хроника</NavLink>
                 <NavLink to="/">Информация</NavLink>
-                <NavLink to="/myfriends">Друзья</NavLink>
+                <NavLink to="/">Друзья</NavLink>  
                 <NavLink to="/">Фото</NavLink>
             </div>
             <div className={d.nav_edit_profile}>Редоктировать проф...</div>
