@@ -1,6 +1,21 @@
 .wrap{
-    border: 1px solid #fff;
-    grid-area: h;
-    
-    background-color: #18191a;
+    /* border: 1px solid #fff; */
+    grid-area: h;    
+    background-color: #18191a;    
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 
+          "l c r ";
+}
+
+.wrap_left{
+    grid-area: l;
+}
+.wrap_center{
+    grid-area: c;
+}
+
+.wrap_right{
+    grid-area: r;
 }
