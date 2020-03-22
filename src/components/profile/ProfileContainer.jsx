@@ -4,15 +4,21 @@ import { addPlacholder, addPost, setUser } from '../../redux/profile-reduce';
 import { connect } from 'react-redux';
 import * as  axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import general, { to_came_in } from '../../redux/general';
 
 class ProfileConteiner extends React.Component{
+    
     componentDidMount(){
-           let userProfileId = this.props.match.params.userId;
-          if(!userProfileId){
-             userProfileId = 2;
-           }
-        
-            debugger
+       debugger
+           let userProfileId = this.props.match.params.userId; 
+
+         if(!userProfileId ){         
+                userProfileId = this.props.general.id 
+            } 
+           
+          
+          
+    
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userProfileId)
         .then( (response)=>{
@@ -38,7 +44,11 @@ class ProfileConteiner extends React.Component{
 
 
 
-let  mapStateToProps = (state) => ( {  profile: state } )
+let  mapStateToProps = (state) => ( { 
+     profile: state,
+     general: state.general
+    
+    } )
 
 export default connect( mapStateToProps, {addPlacholder, addPost, setUser})(withRouter(ProfileConteiner))
  
