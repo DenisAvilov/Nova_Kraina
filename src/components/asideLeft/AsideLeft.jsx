@@ -13,15 +13,20 @@ const AsideLeft = (props) => {
                 <div className={d.title_button}><span>Создать</span> </div>
             </div>
             <ul className={d.nav}>
-                <li><NavLink to="/profile">
-                    <div className={d.nav_user_wrap}>
-                        <div className={d.nav_user_logo}>
-                            <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" />
-                        </div>
-                        <div className={d.nav_user_name}>
-                            <span>Илья Авилов</span>
-                        </div>
-                    </div>
+                <li><NavLink to="/profile">                   
+                        
+                             <div className={d.nav_user_wrap}>
+                                <div className={d.nav_user_logo}>
+                                      <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" />
+                                 </div>
+                                <div className={d.nav_user_name}>
+                                    
+                         <span>{props.user.login? props.user.login :"User Name"}</span>
+                                </div>
+                            </div>
+                       
+                       
+                   
                 </NavLink></li>
                 <li><NavLink to="/friends">
                     <div className={d.nav_user_wrap}>
@@ -63,7 +68,7 @@ const AsideLeft = (props) => {
                         </div>
                     </div>
                 </NavLink></li>
-            </ul>
+            </ul> 
         </div>
     )
 }

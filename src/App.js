@@ -4,8 +4,6 @@ import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
-
-import AsideLeft from './components/asideLeft/AsideLeft';
 import AsideRight from './components/asideRight/AsideRight';
 import Music from './components/music/Music';
 import Dialogues from './components/dialogues/Dialogues';
@@ -15,6 +13,7 @@ import ProfileConteiner from './components/profile/ProfileContainer';
 import FriendsContainer from './components/friends/FriendsContainer';
 import MyFriendsContainer from'./components/myFriends/MyFriendsContainer';
 import HeaderContainer from './components/header/HeaderContainer';
+import AsideLeftContainer from './components/asideLeft/AsideLeftContainer';
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
@@ -25,7 +24,7 @@ const App = () => {
     return (
         <div className="grid" >
             <HeaderContainer />
-            <AsideLeft />
+            <AsideLeftContainer />
             <AsideRight />
             <Route path='/main' render={() => <Main  />} />          
             <Route path='/profile/:userId?' render={() => <ProfileConteiner  />} />
