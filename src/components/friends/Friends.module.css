@@ -31,17 +31,25 @@
    .user_name{
    margin-left: 10px;
    }
-   .status {
+   .status{
     margin-left: auto;
+   }
+   .status button{ 
+    outline: none;
+    border: none;    
     cursor: pointer;
     padding: 10px 20px;
     background-color: rgba(206, 206, 206, 0.1);
-    color: #dddddd;
+    color: #dddddd; 
     border-radius: 8px;
     font-size: .9375rem;
     font-weight: 600;
      }
-     .status:hover{
+     .status button[disabled]{
+        color: #385898;
+     }
+     .status button:hover{
         background-color: rgba(206, 206, 206, 0.2);
         transition: background-color .3s ease;
      }
+     

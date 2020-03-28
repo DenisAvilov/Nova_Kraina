@@ -1,31 +1,37 @@
 const ADD_FRIEND  = "ADD-FRIEND";
 const DEL_FRIEND  = "DEL-FRIEND";
 const SET_USERS_FRIENDS   = "SET-USERS-FRIENDS";
+const TRACKING_BUTTON   = "TRACKING-BUTTON";
 
 let iniliset = {
     users: [       
-    ]
+    ], 
+    usersTracking : [],
+    tracking: null
   }
+ 
 
 const friends = (state = iniliset, action ) => {  
 
     
     switch(action.type){        
-        case ADD_FRIEND: {        
+        case ADD_FRIEND: {  
+       
               return {
                   ...state,
                 users: state.users.map(u =>  {
-                    if(u.id === action.userId){ return{...u, followed: false}}
+                    if(u.id === action.userId){ return{...u, followed: true}}
                     return u; 
                 })
                 }
             }
         case DEL_FRIEND:{
+         
             return {
                 ...state,
               users: state.users.map(u =>  {
                   if(u.id === action.userId){
-                       return{...u, followed: true}
+                       return{...u, followed: false}
                   }
                   return u; })
               }
@@ -38,6 +44,14 @@ const friends = (state = iniliset, action ) => {
 
                       } 
                     }
+        case TRACKING_BUTTON: {
+          
+          return{
+            ...state, usersTracking : action.followed
+            ? [ ...state.usersTracking, action.usersId ]
+            : state.usersTracking.filter(id => id != action.usersId)
+          }
+        }
           default:
             return state;   
     }
@@ -46,5 +60,6 @@ const friends = (state = iniliset, action ) => {
 export const add_Friend = (userId)=>({ type: ADD_FRIEND, userId });
 export const del_Friend = (userId) => ({type: DEL_FRIEND, userId });
 export const setUsersFriends  = ( users ) => ({type: SET_USERS_FRIENDS, users});  
+export const stateTrackingButton = (usersId, followed) => ({type: TRACKING_BUTTON, usersId, followed})
 
 export default friends;

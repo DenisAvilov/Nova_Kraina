@@ -1,6 +1,7 @@
 import React from 'react';
 import d from './Friends.module.css';
 import { NavLink } from 'react-router-dom';
+import { usersApi } from '../../api/Api';
 
   const Friends = (props) => {  
 
@@ -14,8 +15,36 @@ import { NavLink } from 'react-router-dom';
         </div>
 
         <h1 className={d.user_name}>  {user.name} </h1>
-        <div className={d.status}> {user.followed ?  <div onClick={ () => {props.add_Friend(user.id)} }> <span>Вы друзья. </span> <span>Удалить из друзей</span>  </div>  
-        :          <div onClick={ () => { props.del_Friend(user.id)} }> Добавить в друзья </div> }</div>
+        <div  className={d.status}> 
+              {user.followed                          
+                ?  <button  disabled={props.usersTracking.some(id => id == user.id)} onClick={ () => {
+                  props.stateTrackingButton(user.id,  true)
+
+                  usersApi.unfollow(user.id).then( (resultCode) => {
+                  
+                    if(resultCode === 0){  props.del_Friend(user.id) }
+
+                    props.stateTrackingButton(user.id,  false)
+                  } 
+                   )} 
+                   }>  
+                         <span>Удалить из друзей</span> 
+                  </button>  
+
+                :  <button disabled={props.usersTracking.some(id => id == user.id)} onClick={ () => { 
+
+                       props.stateTrackingButton(user.id,  true)
+                    
+                       usersApi.follow(user.id).then(    (resultCode) => {
+                    
+                      if(resultCode === 0){ props.add_Friend(user.id)   }
+                      props.stateTrackingButton(user.id,  false)
+                    }) 
+
+                } }> Добавить в друзья </button> 
+              }
+         </div>
+
     </div>
              
  )}      

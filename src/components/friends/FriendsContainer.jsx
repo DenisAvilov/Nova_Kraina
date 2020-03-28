@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { add_Friend, del_Friend, setUsersFriends } from "../../redux/friends-reduce";
+import { add_Friend, del_Friend, setUsersFriends, stateTrackingButton } from "../../redux/friends-reduce";
 import Friends from "./Friends";
-import * as axios from 'axios';
+
+import { usersApi } from '../../api/Api';
 
 
 class FriendsContainer extends React.Component{
 
      componentDidMount(){
-         axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
-         .then(response => {     
-           
-              this.props.setUsersFriends(response.data)                  
+
+        usersApi.usersGet()
+         .then(data => {           
+              this.props.setUsersFriends(data)                  
          })
      }
 
@@ -19,11 +20,11 @@ class FriendsContainer extends React.Component{
         
         return(           
              <Friends 
-             friends={this.props.friends}
-            
+             friends={this.props.friends}            
              add_Friend={this.props.add_Friend}
              del_Friend={this.props.del_Friend}
-
+             usersTracking={this.props.usersTracking}
+             stateTrackingButton= {this.props.stateTrackingButton}
             
              />
         )
@@ -34,9 +35,10 @@ class FriendsContainer extends React.Component{
 
 let mapStateToProps = (store) => {
     return{
-       friends: store.friends.users
+       friends: store.friends.users,
+       usersTracking: store.friends.usersTracking
     }
 } 
 
  
-export default FriendsContainer = connect( mapStateToProps, {setUsersFriends, add_Friend, del_Friend} )( FriendsContainer );
+export default FriendsContainer = connect( mapStateToProps, {setUsersFriends, add_Friend, del_Friend, stateTrackingButton} )( FriendsContainer );
