@@ -1,49 +1,37 @@
 import React from 'react';
 import { connect } from "react-redux";
-import {  getUsersThunkCreator, friendFollow, friendUnFollow } from "../../redux/friends-reduce";
+import { getUsersThunkCreator, friendFollow, friendUnFollow } from "../../redux/friends-reduce";
 import Friends from "./Friends";
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
+class FriendsContainer extends React.Component {
 
-class FriendsContainer extends React.Component{
-
-     componentDidMount(){
+    componentDidMount() {
         this.props.getUsersThunkCreator()
-    //    usersApi.usersGet()
-    //   .then(data => {           
-    //      this.props.setUsersFriends(data)                  
-    //     })
-     }
+    }
 
-    render(){
-        
-        return(           
-             <Friends 
-             friends={this.props.friends}            
-             usersTracking={this.props.usersTracking}
-             friendFollow={this.props.friendFollow}
-             friendUnFollow={this.props.friendUnFollow}
-            
-             />
+    render() {
+        return (
+            <Friends
+                friends={this.props.friends}
+                usersTracking={this.props.usersTracking}
+                friendFollow={this.props.friendFollow}
+                friendUnFollow={this.props.friendUnFollow}
+            />
         )
     }
 }
 
-  
-let WithAuthRedirectHoc = withAuthRedirect(FriendsContainer)
-
-
-
-
 let mapStateToProps = (store) => {
-    return{
-       friends: store.friends.users,
-       usersTracking: store.friends.usersTracking
+    return {
+        friends: store.friends.users,
+        usersTracking: store.friends.usersTracking
     }
-} 
+}
 
- 
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, { getUsersThunkCreator, friendFollow, friendUnFollow }))(FriendsContainer)
 
-export default FriendsContainer = connect( mapStateToProps,
-     { getUsersThunkCreator, friendFollow, friendUnFollow} )( WithAuthRedirectHoc );
-    
+
