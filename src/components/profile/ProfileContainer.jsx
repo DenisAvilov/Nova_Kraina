@@ -1,28 +1,19 @@
 import React from 'react';
 import Profile from './Profile';
-import { addPlacholder, addPost, setUser } from '../../redux/profile-reduce';
+import { addPlacholder, addPost,  setUsers } from '../../redux/profile-reduce';
 import { connect } from 'react-redux';
-import * as  axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import general, { to_came_in } from '../../redux/general';
-import { usersApi } from '../../api/Api';
+
 
 
 
 class ProfileConteiner extends React.Component{
     
-    componentDidMount(){
-       
-           let userProfileId = this.props.match.params.userId; 
-         if(!userProfileId ){         
-                userProfileId = this.props.general.id 
-            } 
-          usersApi.profile(userProfileId)
-        .then( (response)=>{  
-             this.props.setUser(response.data)  
-        } )
+    componentDidMount(){  
 
-    }
+      this.props.setUsers(this.props.match.params.userId, this.props.general.id ) 
+
+     }
 
     render(){   
      return(
@@ -46,5 +37,5 @@ let  mapStateToProps = (state) => ( {
     
     } )
 
-export default connect( mapStateToProps, {addPlacholder, addPost, setUser})(withRouter(ProfileConteiner))
+export default connect( mapStateToProps, {addPlacholder, addPost, setUsers } ) ( withRouter(ProfileConteiner) )
  

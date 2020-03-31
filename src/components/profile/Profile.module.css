@@ -1,5 +1,6 @@
 .wrap {
     /* border: 1px solid #fff;  */
+    
     grid-area: m;
     display: grid;
     grid-template-columns: 1fr 1fr;

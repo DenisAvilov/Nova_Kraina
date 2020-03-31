@@ -1,3 +1,5 @@
+import { usersApi } from "../api/Api";
+
 const TO_COME_IN  = "TO-COME-IN";
 const IS_OPEN = "OPEN";
 const IS_CLOSE = "CLOSE";
@@ -45,5 +47,14 @@ export const to_came_in = (id, email, login)=>({ type: TO_COME_IN,  id, email, l
 export const is_open = () => ({ type: IS_OPEN });
 export const is_close = () => ({ type: IS_CLOSE });
 
+export const getUsersData = () => (distpach) => {
+  usersApi.authApi()
+        .then( (response) => {
+            if(response.data.resultCode === 0){
+              distpach( to_came_in( response.data.data ) )
+            }
+        } )
+  
+}
 
 export default general;

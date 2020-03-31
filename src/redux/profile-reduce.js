@@ -1,3 +1,5 @@
+import {usersApi} from './../api/Api' 
+
 const  ADD_POST = 'ADD-POST';
 const ADD_NEW_PLACE_HOLDER = 'ADD-NEW-PLACE-HOLDER';
 const SET_USERS = 'SET-USERS'
@@ -86,8 +88,26 @@ const profile = (state = store, action) => {
 }
 
 
-export let addPlacholder = (text) => ({type : ADD_NEW_PLACE_HOLDER, text: text })
-export let addPost = () =>( {type : ADD_POST} )
-export let setUser = (userID) => ({type: SET_USERS, userID})
+export const addPlacholder = (text) => ({type : ADD_NEW_PLACE_HOLDER, text: text })
+export const addPost = () =>( {type : ADD_POST} )
+export const setUser = (userID) => ({type: SET_USERS, userID})
 export default profile;
 
+export const setUsers = (userId, generalId) => {
+    
+    return (dispatch) => {
+
+        let userProfileId = userId; 
+        if(!userProfileId ){         
+               userProfileId = generalId 
+           } 
+         usersApi.profile(userProfileId)
+       .then( (response)=>{  
+        dispatch( setUser(response.data) ) 
+       } )
+
+    }
+
+}
+
+// export const exemple = (parametrs) => (dispatch) => { API }

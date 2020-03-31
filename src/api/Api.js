@@ -22,7 +22,6 @@ export const usersApi = {
     return instance.post(`follow/${userId}`, {})
       .then(
         (response) => {
-         
           return response.data.resultCode
         })
   },
@@ -30,9 +29,14 @@ export const usersApi = {
   unfollow: (userFollow) => {
     return instance.delete(`follow/` + userFollow).then(
       (response) => {
-       
         return response.data.resultCode
       })
+  },
+  authApi: () => {
+    return instance.get(`auth/me`)
   }
 
-} 
+
+
+}
+
