@@ -6,7 +6,6 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import AsideRight from './components/asideRight/AsideRight';
 import Music from './components/music/Music';
-import Dialogues from './components/dialogues/Dialogues';
 import Video from './components/video/Video';
 import Main from './components/main/Main';
 import ProfileConteiner from './components/profile/ProfileContainer';
@@ -14,29 +13,40 @@ import FriendsContainer from './components/friends/FriendsContainer';
 import MyFriendsContainer from'./components/myFriends/MyFriendsContainer';
 import HeaderContainer from './components/header/HeaderContainer';
 import AsideLeftContainer from './components/asideLeft/AsideLeftContainer';
+import Login from './components/login/Login';
+import DialoguesContainer from './components/dialogues/DialoguesContainer';
+
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
      faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
-const App = () => {
-   
+
+
+
+
+const App = () => {   
+
     return (
         <div className="grid" >
             <HeaderContainer />
             <AsideLeftContainer />
             <AsideRight />
-            <Route path='/main' render={() => <Main  />} />          
+            <Route path='/login' render={() => <Login  />} />                    
             <Route path='/profile/:userId?' render={() => <ProfileConteiner  />} />
             <Route path='/friends' render={() => < FriendsContainer />} /> 
-            <Route path='/dialogues'  render={() => < Dialogues />} />
+            <Route path='/dialogues'  render={() => < DialoguesContainer />} />
             <Route path='/video' render={() => < Video />}/>
             <Route path='/music'render={() => < Music />}/>
             <Route path='/myfriends'render={() => < MyFriendsContainer />}/> 
-
+            <Route exact path='/'render={() => <Main />}/>  
             </div>
         );
-    }
-    
-    
-export default App;
+
+         
+
+    }   
+   
+     
+ 
+ export default App;

@@ -1,10 +1,20 @@
 import React from 'react';
 import d from './Dialogues.module.css';
 
-const Dialogues = () =>{
-    return (
-        <div className={d.wrap}>Dialogues</div>
-    )
+
+
+const Dialogues = (props) =>{
+  
+    
+       return (
+        <div className={d.wrap}>
+           
+            dialogues
+             
+            </div>
+   )
+
+
 }
 
 export default Dialogues;
