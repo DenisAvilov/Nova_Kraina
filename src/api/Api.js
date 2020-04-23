@@ -1,5 +1,6 @@
 import * as axios from "axios";
 const instance = axios.create({
+  //Проверка куки
   withCredentials: true,
   baseURL: `https://social-network.samuraijs.com/api/1.0/`,
   headers: {
@@ -33,10 +34,23 @@ export const usersApi = {
       })
   },
   authApi: () => {
-    return instance.get(`auth/me`)
+    console.warn("Use authApi.authMe()")
+    return authApi.authMe()
   }
 
 
 
 }
 
+export const authApi = {
+  authMe : () => {
+    return  instance.get('auth/me')
+  },
+  authLogin : (email, password, rememberMe) => {
+    return instance.post('/auth/login', {email, password, rememberMe})
+  },
+  authDelete : () => {
+    return instance.delete('/auth/login')
+  } 
+   
+}
