@@ -1,8 +1,9 @@
-import { usersApi } from "../api/Api";
+import { usersApi, authApi } from "../api/Api";
 
 const TO_COME_IN  = "TO-COME-IN";
 const IS_OPEN = "OPEN";
 const IS_CLOSE = "CLOSE";
+const LOGIN_IN = "LOGIN-IN";
 
 let iniliset = {
       id: null,
@@ -19,10 +20,10 @@ const general = (state = iniliset, action ) => {
         case TO_COME_IN: {            
              return{
                ...state,
-               id: action.id.id,
-               email: action.id.email,
-               login: action.id.login,
-               isYou: true
+               id: action.id,
+               email: action.email,
+               login: action.login,
+               isYou: action.isYou
 
              }
             } 
@@ -37,13 +38,20 @@ const general = (state = iniliset, action ) => {
              ...state,
              isOpen: state.isOpen = false
            }
-         }        
+         } 
+         case LOGIN_IN: {
+           return{
+             ...state,
+
+           }
+         }       
           default:
             return state;   
     }
 }
 
-export const to_came_in = (id, email, login)=>({ type: TO_COME_IN,  id, email, login });
+export const to_came_in = (email, id, login, isYou)=>({ type: TO_COME_IN, email, id, login, isYou });
+
 export const is_open = () => ({ type: IS_OPEN });
 export const is_close = () => ({ type: IS_CLOSE });
 
@@ -51,10 +59,32 @@ export const getUsersData = () => (distpach) => {
   usersApi.authApi()
         .then( (response) => {
             if(response.data.resultCode === 0){
-              distpach( to_came_in( response.data.data ) )
+              distpach( to_came_in(  response.data.data.email, response.data.data.id, response.data.data.login, true ) )
             }
         } )
   
+}
+
+
+export const is_login = (email, password, rememberMe = false) => distpach => {
+  authApi.authLogin(email, password, rememberMe).then( response => {   
+    if(response.data.resultCode === 0){
+      authApi.authMe().then( response => {       
+         distpach(to_came_in( response.data.data.email, response.data.data.id, response.data.data.login, true))
+      } )
+    }
+    
+  })
+}
+
+export const is_logOut = () => distpach => {
+  authApi.authDelete().then( response => {   
+ 
+    if(response.data.resultCode === 0){            
+         distpach(to_came_in( null, null,  null,  false ))      
+    }
+    
+  })
 }
 
 export default general;
