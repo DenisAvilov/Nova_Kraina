@@ -4,12 +4,14 @@ import myfriends from "./my-friends-reduce";
 import friends from "./friends-reduce";
 import general from "./general";
 import  thunkMiddleware from 'redux-thunk'
+import { reducer as formReducer } from 'redux-form'
 
 const reducers = combineReducers({
     profile: profile,
     myfriends: myfriends,
     friends: friends,
-    general: general   
+    general: general, 
+    form: formReducer  
 })
 //создание объекта store и просежуточного слоя который умеет разделять функции и объекты
 let store = createStore(reducers, applyMiddleware(thunkMiddleware) ); 
