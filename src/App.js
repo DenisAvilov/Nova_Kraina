@@ -13,14 +13,14 @@ import FriendsContainer from './components/friends/FriendsContainer';
 import MyFriendsContainer from'./components/myFriends/MyFriendsContainer';
 import HeaderContainer from './components/header/HeaderContainer';
 import AsideLeftContainer from './components/asideLeft/AsideLeftContainer';
-import Login from './components/login/Login';
+
 import DialoguesContainer from './components/dialogues/DialoguesContainer';
+import LoginContainer from './components/login/LoginContainer';
 
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
      faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
-
 
 
 
@@ -32,7 +32,7 @@ const App = () => {
             <HeaderContainer />
             <AsideLeftContainer />
             <AsideRight />
-            <Route path='/login' render={() => <Login  />} />                    
+            <Route path='/login' render={() => < LoginContainer />} />                    
             <Route path='/profile/:userId?' render={() => <ProfileConteiner  />} />
             <Route path='/friends' render={() => < FriendsContainer />} /> 
             <Route path='/dialogues'  render={() => < DialoguesContainer />} />
