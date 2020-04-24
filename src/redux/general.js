@@ -1,4 +1,5 @@
 import { usersApi, authApi } from "../api/Api";
+import { stopSubmit } from "redux-form";
 
 const TO_COME_IN  = "TO-COME-IN";
 const IS_OPEN = "OPEN";
@@ -73,7 +74,10 @@ export const is_login = (email, password, rememberMe = false) => distpach => {
          distpach(to_came_in( response.data.data.email, response.data.data.id, response.data.data.login, true))
       } )
     }
-    
+    else{      
+          //диспатчим общую ошибку с сервера 
+      distpach(stopSubmit("loginField", {_error: response.data.messages}));
+    }
   })
 }
 
