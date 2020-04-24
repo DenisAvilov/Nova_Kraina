@@ -2,28 +2,31 @@ import React from 'react';
 import d from './Login.module.css';
 import { Redirect } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
+import { required, email, minValue5, minValueSim5 } from '../renderField/validationForm';
+import {  yourField } from '../renderField/renderField';
 
-
+let input = yourField("input");
 
 const FieldLoginForm = props => {
-  const { handleSubmit } = props
+  const { handleSubmit } = props; 
     return (
-        <form onSubmit={handleSubmit}>           
-            <div>
-                <label htmlFor="Field">Email</label>
-                <Field component="input" name="email" type="email" placeholder="email"></Field>
+        <form onSubmit={handleSubmit} className={ d.wrapForm + " " + ( props.error ? d.errors : " ")}>
+            <div className={d.wrapField}>             
+                <Field component={input} validate={[required, email]} name="email" type="email" label="Email"></Field>
             </div>
-            <div>
-                <label htmlFor="Password">Password</label>
-                <Field component="input" name="password" type="password" placeholder="Password"></Field>
+            <div className={d.wrapField}>              
+                <Field component={input} validate={[required, minValue5, minValueSim5]} name="password" type="password" label="Password"></Field>
             </div>
-            <div>
-                <label htmlFor="RememberMy">Remember my</label>
-                <Field component="input" name="remember_my"  type="checkbox" placeholder="Remember my"></Field>
+            <div className={d.wrapChekbox}>               
+                <Field component={input} name="remember_my"  type="checkbox" label="Remember my"></Field>
             </div>
-            <button type="submit">Push</button>
-        </form>
+            <div className={d.errorss}> 
+             {props.error ?? props.error }   
+            </div>
+            <button type="submit">Войти</button>
+        </form>   
     )
+    
 } 
 
 
@@ -37,8 +40,8 @@ let LoginForm = reduxForm({
 
 const Login = (props) => {
      if(props.redireckInProfile) return <Redirect to={"/profile"}></Redirect>
-    return (<div>
-         <h1 className={d.wrap}>Авторизируйтесь</h1>    
+    return (<div className={d.wrap}>
+         <h1>Авторизируйтесь</h1>    
         < LoginForm onSubmit={props.onSubmit}/> 
         </div>
     )
