@@ -1,0 +1,28 @@
+.wrapField{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.wrapInput{
+    position: relative;
+}
+.wrapInput input{
+    width: 100%;
+    margin-bottom: 10px;
+    outline: none;
+   
+}
+.wrapInput input[type="checkbox" i]{
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+}
+.wrapField .error{
+ color: red;
+ position: absolute;
+ top: -25px;
+}
+
+.wrapField.error input{
+    border: 2px solid red;
+}
