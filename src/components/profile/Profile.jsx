@@ -23,7 +23,8 @@ const Profile = (props) => {
         <div className={d.wrapper_state}>
             <UserState brief={props.profile.profile.briefInformation} />
             <UserWritesNewPost
-
+               user={props.profile.profile.profile}
+                onSubmit={props.onSubmit}
                 addPost={props.addPost}
                 addPlacholder={props.addPlacholder}
                 placeholder={props.profile.profile.placeholder} />

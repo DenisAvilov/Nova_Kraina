@@ -1,34 +1,36 @@
 import React from 'react';
 import d from './UserWritesNewPost.module.css';
+import { yourField } from '../../renderField/renderField';
+import { reduxForm, Field } from 'redux-form';
+let textarea =  yourField("textarea"), input = yourField("input");
 
+const FormForNewPost = (props) => {
 
+    const { handleSubmit } = props; 
 
-const UserWritesNewPost = (props) => {
+    return(
+        <form onSubmit={handleSubmit} className={d.write_news}>
+        <Field component={textarea} name="writeNewPost" type="text" cols="10" rows="1"  label={props.placeholder}></Field>
+        <button type="submit" > Опубликовать </button>
+    </form>
+    )
 
-    let newTextUser = React.createRef();
-    let onAddPost = () => {
-      
-        props.addPost();  
-        
-    }
+}
+ 
+let FormPost = reduxForm(
+    { form: "formNewPost"}
+)(FormForNewPost)
 
-    let changePlaceholder = () => {
-        let text = newTextUser.current.value;
-        props.addPlacholder(text)
-       
-    }
+const UserWritesNewPost = (props) => { 
 
     return (
         <div className={d.new_news}>
             <div className={d.your_news}>
                 <div className={d.your_user_logo}>
-                    <img src="http://avilovdenis.pp.ua/img/2-mini-min.png"/>
+                {  props.user.photos.small === null ?  <img src="https://www.w3schools.com/w3css/img_avatar3.png" />  : <img src={props.user.photos.small} />   }
+                   
                 </div>
-                <div className={d.write_news}>
-                    <textarea onChange={changePlaceholder} ref={newTextUser} cols="10" rows="1"
-                        value={props.placeholder}></textarea>
-                    <input onClick={ onAddPost} type="submit" />
-                </div>
+                <FormPost onSubmit={props.onSubmit} placeholder={props.placeholder}/>               
             </div>
         </div>
     )

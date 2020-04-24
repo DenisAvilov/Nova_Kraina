@@ -1,10 +1,9 @@
-import {usersApi} from './../api/Api' 
+import { usersApi } from './../api/Api'
 
-const  ADD_POST = 'ADD-POST';
-const ADD_NEW_PLACE_HOLDER = 'ADD-NEW-PLACE-HOLDER';
+const ADD_POST = 'ADD-POST';
 const SET_USERS = 'SET-USERS'
 
-let store =  {
+let store = {
     //profile: [{
     //     id: 0,
     //     name: 'Илья',
@@ -22,12 +21,12 @@ let store =  {
     //         small: null,
     //     }  
     // }],
-    profile:{ 
+    profile: {
 
-       photos:{
-           small: null,
-           large: null
-       }
+        photos: {
+            small: null,
+            large: null
+        }
     },
     briefInformation: [{
         id: 0,
@@ -37,74 +36,69 @@ let store =  {
         from: 'Харьков'
     }],
     post: [
-         {
-         id: 0,
-         avatarImg: "http://avilovdenis.pp.ua/img/2-mini-min.png",
-         name: 'Никита',
-         secondName: 'Авилов',
-         title: 'Природа',
-           imgPost: "https://www.prostir.ua/wp-content/uploads/2020/03/unnamed-101-1024x576.png",
-         like: 30,
-         massenge: 'Lorem Ipsum - это текст-"рыба", ой" для текстов на латинице с начала XVI века.то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов',
-        
-    }
-   ],
-    placeholder: 'Напишите что-нибудь'
-} 
+        {
+            id: 0,
+            avatarImg: "https://www.w3schools.com/w3css/img_avatar3.png",
+            name: 'Никита',
+            secondName: 'Авилов',
+            title: 'Природа',
+            imgPost: "https://www.prostir.ua/wp-content/uploads/2020/03/unnamed-101-1024x576.png",
+            like: 30,
+            massenge: 'Lorem Ipsum - это текст-"рыба", ой" для текстов на латинице с начала XVI века.то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов',
+
+        }
+    ],
+    placeholder: 'Что у вас нового?'
+}
 
 const profile = (state = store, action) => {
-    switch(action.type){
-        case ADD_NEW_PLACE_HOLDER: {
-          return  { ...state, placeholder : action.text
-        }  
-     } 
-        case ADD_POST:{
+    switch (action.type) {      
+        case ADD_POST: {
             let newObj = {
                 id: 12,
-                avatarImg: "http://avilovdenis.pp.ua/img/2-mini-min.png",
+                avatarImg: "https://www.w3schools.com/w3css/img_avatar3.png",
                 name: 'Никита',
                 secondName: 'Авилов',
                 title: 'Природа',
                 imgPost: "https://img3.goodfon.ru/wallpaper/nbig/3/cb/freedom-svoboda-nadpis-pesok.jpg",
                 like: 99,
-                massenge: state.placeholder,
+                massenge: action.newTextPost.writeNewPost,
             }
-        return{
-            ...state,  
-             post: [...state.post, newObj ],
-             placeholder : "Напишите что еще!"    
-        }  
-    }        
-        case SET_USERS:{         
-            return{ ...state,
-                profile : action.userID
+            return {
+                ...state,
+                post: [...state.post, newObj],               
             }
         }
-     default:
-         return state;
+        case SET_USERS: {
+            return {
+                ...state,
+                profile: action.userID
+            }
+        }
+        default:
+            return state;
     }
- 
-   
+
+
 }
 
 
-export const addPlacholder = (text) => ({type : ADD_NEW_PLACE_HOLDER, text: text })
-export const addPost = () =>( {type : ADD_POST} )
-export const setUser = (userID) => ({type: SET_USERS, userID})
+export const addPost = (newTextPost) => ({ type: ADD_POST, newTextPost })
+export const setUser = (userID) => ({ type: SET_USERS, userID })
 export default profile;
 
 export const setUsers = (userId, generalId) => {
-    
+
     return (dispatch) => {
 
-        let userProfileId = userId; 
-        if(!userProfileId ){         
-               userProfileId = generalId 
-           } 
-         usersApi.profile(userProfileId)
-       .then( (response)=>{  
-        dispatch( setUser(response.data) ) 
-       } )
+        let userProfileId = userId;
+        if (!userProfileId) {
+            userProfileId = generalId
+        }
+        usersApi.profile(userProfileId)
+            .then((response) => {
+                dispatch(setUser(response.data))
+            })
 
     }
 
