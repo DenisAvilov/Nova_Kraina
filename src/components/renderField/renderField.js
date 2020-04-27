@@ -2,7 +2,7 @@ import React from 'react'
 import d from './renderField.module.css'
 import { Field, reduxForm } from 'redux-form'
 
-export const yourField = Gat =>({input,
+export const yourField = Tag =>({input,
     label,
     type,
     meta: { touched, error, warning }}) =>
@@ -15,7 +15,7 @@ export const yourField = Gat =>({input,
             {touched &&
               ((error && <span className={  d.error }>{error}</span>) ||
                 (warning && <span>{warning}</span>))}
-                <Gat {...input} placeholder={label} type={type}  />
+                <Tag {...input} placeholder={label} type={type}  />
           </div>
         </div>
 

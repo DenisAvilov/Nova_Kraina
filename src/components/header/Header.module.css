@@ -19,3 +19,6 @@
 .wrap_right{
     grid-area: r;
 }
+.logout{
+    cursor: pointer;
+}

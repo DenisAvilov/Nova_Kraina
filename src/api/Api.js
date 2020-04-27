@@ -34,7 +34,7 @@ export const usersApi = {
       })
   },
   authApi: () => {
-    console.warn("Use authApi.authMe()")
+    console.warn("Use authApi.authMe()")  
     return authApi.authMe()
   }
 

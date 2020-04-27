@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, withRouter} from "react-router-dom";
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -16,7 +16,10 @@ import AsideLeftContainer from './components/asideLeft/AsideLeftContainer';
 
 import DialoguesContainer from './components/dialogues/DialoguesContainer';
 import LoginContainer from './components/login/LoginContainer';
-
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { is_initialization } from './redux/initialization-reduce';
+ 
 
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
@@ -24,9 +27,17 @@ library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
 
 
 
+class App extends React.Component{ 
 
-const App = () => {   
+    componentDidMount(){    
+        
+        
+       this.props.is_initialization()
 
+    }
+  
+ render(){
+  if(!this.props.initializationSeccess) return <>LOADING</>
     return (
         <div className="grid" >
             <HeaderContainer />
@@ -42,11 +53,16 @@ const App = () => {
             <Route exact path='/'render={() => <Main />}/>  
             </div>
         );
-
-         
-
+    }
     }   
    
-     
+ let setStateToProps = store => {
+     return{
+        initializationSeccess: store.initialization.success
+     }
+ }    
  
- export default App;
+export default compose(
+    withRouter,
+    connect(setStateToProps , { is_initialization })
+)(App); 

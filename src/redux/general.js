@@ -57,12 +57,14 @@ export const is_open = () => ({ type: IS_OPEN });
 export const is_close = () => ({ type: IS_CLOSE });
 
 export const getUsersData = () => (distpach) => {
-  usersApi.authApi()
-        .then( (response) => {
+ return usersApi.authApi()
+       .then( (response) => {         
             if(response.data.resultCode === 0){
-              distpach( to_came_in(  response.data.data.email, response.data.data.id, response.data.data.login, true ) )
-            }
-        } )
+              distpach(  to_came_in(  response.data.data.email, response.data.data.id, response.data.data.login, true ) )
+           }
+           
+        }   
+        )
   
 }
 

@@ -5,9 +5,9 @@ import { getUsersData, is_logOut } from '../../redux/general';
 
 class HeaderContainer extends React.Component {
 
-     componentDidMount(){
-      this.props.getUsersData()     
-     }
+    //  componentDidMount(){
+    //   this.props.getUsersData()     
+    //  }
 
     render(){     
         return (

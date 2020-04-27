@@ -38,6 +38,7 @@ let LoginForm = reduxForm({
 
 
 
+
 const Login = (props) => {
      if(props.redireckInProfile) return <Redirect to={"/profile"}></Redirect>
     return (<div className={d.wrap}>

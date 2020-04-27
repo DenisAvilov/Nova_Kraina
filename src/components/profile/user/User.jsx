@@ -15,7 +15,7 @@ const User = (props) => {
             
             <div className={d.header_logo_wrap}>
                 <div className={d.header_logo}>
-                {  props.user.photos.small === null ?  <img src="https://bestinstrumentalever.com/wp-content/uploads/2018/03/call-of-freedom.jpg" />  : <img src={props.user.photos.small} />   }
+                {  props.user.photos.small === null ?  <img src="https://www.w3schools.com/w3css/img_avatar3.png" />  : <img src={props.user.photos.small} />   }
                   
                 </div>
                 <div className={d.header_logo_download}>
