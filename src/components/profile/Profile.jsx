@@ -9,7 +9,7 @@ import Post from './post/Post';
 
 const Profile = (props) => {
 
-    const post = props.profile.profile.post.map(p =>
+    const post = props.profile.post.map(p =>
         <Post key={p.id} id={p.id}
             avatarImg={p.avatarImg}
             title={p.title} imgPost={p.imgPost}
@@ -17,17 +17,17 @@ const Profile = (props) => {
 
     return (<div className={d.wrap}>
 
-        <User user={props.profile.profile.profile} />
+        <User user={props.user} />
 
         <UserNavigation />
         <div className={d.wrapper_state}>
-            <UserState brief={props.profile.profile.briefInformation} />
+            <UserState brief={props.brief} />
             <UserWritesNewPost
-               user={props.profile.profile.profile}
+               user={props.user}
                 onSubmit={props.onSubmit}
                 addPost={props.addPost}
                 addPlacholder={props.addPlacholder}
-                placeholder={props.profile.profile.placeholder} />
+                placeholder={props.placeholder} />
 
             <div className={d.posts}>
                 {post}

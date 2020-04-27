@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { getUser, getGeneral } from '../../redux/selector-redux';
 
 class ProfileConteiner extends React.Component {
 
@@ -33,9 +34,11 @@ class ProfileConteiner extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    profile: state,
-    general: state.general    
-    
+    profile: getUser(state),
+    brief: getUser(state).briefInformation,
+    placeholder: getUser(state).placeholder,        
+    user: getUser(state).profile,
+    general: getGeneral(state)
 })
 
 export default compose(
