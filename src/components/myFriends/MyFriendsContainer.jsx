@@ -31,11 +31,7 @@ let mapStateToProps = (store) => {
     myfriends: store.myfriends
     }
 } 
-// let mapDispatchToProps = (dispatch) => {
-//     return{
-       
-//     }
-// }
+
 
 export default connect( mapStateToProps, { setUsers } )(  MyFriendsContainer );
 

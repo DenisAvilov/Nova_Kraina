@@ -23,10 +23,7 @@ const AsideLeft = (props) => {
                                     
                          <span>{props.user.login? props.user.login :"User Name"}</span>
                                 </div>
-                            </div>
-                       
-                       
-                   
+                            </div>                  
                 </NavLink></li>
                 <li><NavLink to="/friends">
                     <div className={d.nav_user_wrap}>
@@ -37,37 +34,7 @@ const AsideLeft = (props) => {
                             <span>Друзья</span>                            
                         </div>
                     </div>
-                </NavLink></li>
-                <li><NavLink to="/dialogues">
-                    <div className={d.nav_user_wrap}>
-                        <div className={d.nav_user_logo}>
-                       <div className={d.nav_user_icon}> <FontAwesomeIcon icon="diagnoses" /></div>
-                        </div>
-                        <div className={d.nav_user_name}>
-                            <span>Диалоги</span>                            
-                        </div>
-                    </div>
-                </NavLink></li>
-                <li><NavLink to="/video">
-                    <div className={d.nav_user_wrap}>
-                        <div className={d.nav_user_logo}>
-                       <div className={d.nav_user_icon}> <FontAwesomeIcon icon="file-video" /></div>
-                        </div>
-                        <div className={d.nav_user_name}>
-                            <span>Видео</span>                            
-                        </div>
-                    </div>
-                </NavLink></li>
-                <li><NavLink to="/music">
-                    <div className={d.nav_user_wrap}>
-                        <div className={d.nav_user_logo}>
-                       <div className={d.nav_user_icon}> <FontAwesomeIcon icon="music" /></div>
-                        </div>
-                        <div className={d.nav_user_name}>
-                            <span>Музыка</span>                            
-                        </div>
-                    </div>
-                </NavLink></li>
+                </NavLink></li>         
             </ul> 
         </div>
     )

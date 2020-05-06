@@ -12,6 +12,7 @@ class FriendsContainer extends React.Component {
     }
 
     render() {
+        console.log("Render Friends()")
         return (
             <Friends
                 friends={this.props.friends}
@@ -24,6 +25,7 @@ class FriendsContainer extends React.Component {
 }
 
 let mapStateToProps = (store) => {
+    console.log("mapStateToProps Friends()")
     return {
         friends: store.friends.users,
         usersTracking: store.friends.usersTracking

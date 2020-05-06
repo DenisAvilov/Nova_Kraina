@@ -1,6 +1,5 @@
 import React from 'react'
 import d from './MyFriends.module.css'
-import User from '../profile/user/User'
 import Friend from './friend/Friend'
 
 const MyFriends = (props)=>{
@@ -13,6 +12,7 @@ const MyFriends = (props)=>{
                   {/* <User  user={props.users.user}/> */}
                     <div className={d.friends_wrap}>
                          {friend} 
+                         <p>"dscdscsc"</p>
                     </div>                    
            
         </div>

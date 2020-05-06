@@ -9,7 +9,7 @@ import Post from './post/Post';
 
 const Profile = (props) => {
 
-    const post = props.profile.post.map(p =>
+    const post = props.post.map(p =>
         <Post key={p.id} id={p.id}
             avatarImg={p.avatarImg}
             title={p.title} imgPost={p.imgPost}
