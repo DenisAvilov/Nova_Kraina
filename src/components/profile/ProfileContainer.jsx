@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import { compose } from 'redux';
-import {getUser, getGeneral, getPost, getBrief, getPlaceholder } from '../../redux/selector-redux';
+import { getGeneral } from '../../redux/selector-redux';
 
 
 class ProfileConteiner extends React.Component {
@@ -14,19 +14,16 @@ class ProfileConteiner extends React.Component {
 
         this.props.setUsers(this.props.match.params.userId, this.props.general.id)
       
-     
-           
-        
     }
 
     submit = values => {       
-         this.props.addPost(values)
+         this.props.addPost(values.writeNewPost)
           values.writeNewPost = " "
       }
 
 
     render() {
-        console.log("render()")
+      
         return (
             <>
                 <Profile
@@ -43,19 +40,12 @@ class ProfileConteiner extends React.Component {
 
 let mapStateToProps = (state) => {
     console.log("mapStateToProps()")
-    debugger
-        return {
-           // test: state.profile,
-            //state.profile.post
-            post: state.profile.post,
-            // post: getPost(state),
-            //state.profile.briefInformation
-            brief: state.profile.briefInformation,
-            //state.profile.placeholder
-            placeholder: state.profile.placeholder,  
-            // state.profile.profile     
-            user: state.profile,
-            //state.general
+ 
+        return {      
+            post: state.profile.post,       
+            brief: state.profile.briefInformation,       
+            placeholder: state.profile.placeholder,            
+            user: state.profile,       
             general: getGeneral(state)
             
 }}
