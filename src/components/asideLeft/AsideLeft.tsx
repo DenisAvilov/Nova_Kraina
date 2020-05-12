@@ -1,9 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import d from './AsideLeft.module.css';
 import { NavLink } from 'react-router-dom';
+import { GeneralType } from '../../types/State_General_Reduce';
 
-const AsideLeft = (props) => {
+type AsideLeftType = {
+    user: GeneralType
+}
+
+const AsideLeft: React.FC<AsideLeftType>  = (props: AsideLeftType) => {
     return (
         <div className={d.wrap}>
             <div className={d.title}>
@@ -21,7 +26,7 @@ const AsideLeft = (props) => {
                                  </div>
                                 <div className={d.nav_user_name}>
                                     
-                         <span>{props.user.login? props.user.login :"User Name"}</span>
+                         <span>{props.user.login? props.user.login : "User Name"}</span>
                                 </div>
                             </div>                  
                 </NavLink></li>

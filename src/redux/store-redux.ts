@@ -2,7 +2,7 @@ import { type } from 'os';
 
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import profile from "./profile-reduce";
-import myfriends from "./my-friends-reduce";
+
 import friends from "./friends-reduce";
 import general from "./general";
 import  thunkMiddleware from 'redux-thunk'
@@ -11,18 +11,21 @@ import initialization from "./initialization-reduce";
 
 
 
-const reducers = combineReducers({
+const RootReducer = combineReducers({
     profile: profile,
-    myfriends: myfriends,
     friends: friends,
     general: general,
     initialization: initialization,
     form: formReducer  
 })
+
+// return type store
+export type RootReducerType = ReturnType<typeof RootReducer>
+
+let test : RootReducerType
+
 //создание объекта store и просежуточного слоя который умеет разделять функции и объекты
-
-
-let store = createStore(reducers, applyMiddleware(thunkMiddleware) ); 
+let store = createStore(RootReducer, applyMiddleware(thunkMiddleware) ); 
 
 declare global {
     interface Window {

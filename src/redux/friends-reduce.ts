@@ -7,24 +7,28 @@ const DEL_FRIEND = "DEL-FRIEND";
 const SET_USERS_FRIENDS = "SET-USERS-FRIENDS";
 const TRACKING_BUTTON = "TRACKING-BUTTON";
 
-type Id = {
+//[] это певдо истина
+type PhotosType = {
+  small: null | string
+  large: null | string
+}
+export type ItemsType = {
+  followed: boolean
   id: number
+  name: string
+  photos: PhotosType
+  status: null
+  uniqueUrlName: null
 }
 
-let Iniliset = {
-  users: [] as Array<Id>,
-  usersTracking: [] as Array<number>,
-  tracking: null as boolean | null
+let iniliset = {
+  users: [] as Array<ItemsType>,
+  usersTracking: [] as Array<number>,  
 }
 
-export type InilisetType = typeof Iniliset
+export type InilisetType = typeof iniliset
 
-let iniliset: InilisetType = {
-  users: [],
-  usersTracking: [],
-  tracking: null
-}
-const friends = (state = iniliset, action: ActionType): InilisetType => {
+const friends = (state = iniliset , action: ActionType): InilisetType => {
   switch (action.type) {
     case ADD_FRIEND: {
 
@@ -74,29 +78,26 @@ type ActionType = ReturnType<typeof add_Friend> | ReturnType<typeof del_Friend> 
 
 export const add_Friend = (userId: number) => ({ type: interLiteralString(ADD_FRIEND), userId } as const);
 
-type PhotosType = {
-  small: null | string
-  large: null | string
-}
-type ItemsType = {
-  followed: boolean
-  id: number
-  name: string
-  photos: PhotosType
-  status: null
-  uniqueUrlName: null
-}
+
 
 export const del_Friend = (userId: number) => ({ type: interLiteralString(DEL_FRIEND), userId } as const);
-export const setUsersFriends = (items: Array<ItemsType>) => ({ type: interLiteralString(SET_USERS_FRIENDS), items } as const);
-export const stateTrackingButton = (usersId: number, followed: boolean) => ({ type: interLiteralString(TRACKING_BUTTON), usersId, followed } as const)
+export const setUsersFriends = (items: any) => ({ type: interLiteralString(SET_USERS_FRIENDS), items } as const);
+export const stateTrackingButton = (usersId: number, followed: boolean) =>
+ ({ type: interLiteralString(TRACKING_BUTTON), usersId, followed } as const)
+
 export default friends;
+type dataType = {
+  error: null | string
+  items:  Array<ItemsType>
+  totalCount : number
+  __proto__: {}
+}
 
 export const getUsersThunkCreator = () => {
   //возвращаю  санки
   return (dispatch: any) => {
     usersApi.usersGet()
-      .then((data: any) => {
+      .then((data: dataType) => {
 
         dispatch(setUsersFriends(data.items))
       })

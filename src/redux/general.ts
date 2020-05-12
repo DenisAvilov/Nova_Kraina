@@ -13,7 +13,7 @@ let iniliset: GeneralType = {
       email: null,
       login: null,
       isYou: false,
-      isOpen: false,
+      isOpen: false,     
   }
 //Принимает  State and return Type as state : GeneralType
 const general = (state = iniliset, action: ActionType): GeneralType => {      
@@ -24,7 +24,7 @@ const general = (state = iniliset, action: ActionType): GeneralType => {
                id: action.id,
                email: action.email,
                login: action.login,
-               isYou: action.isYou
+               isYou: action.isYou                
              }
             } 
          case IS_OPEN: {
@@ -36,7 +36,7 @@ const general = (state = iniliset, action: ActionType): GeneralType => {
          case IS_CLOSE: {
            return{
              ...state,
-             isOpen: state.isOpen = false
+             isOpen: state.isOpen = false             
            }
          } 
              
