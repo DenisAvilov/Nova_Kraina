@@ -32,31 +32,23 @@ type  MathType = {
     url: string
 }
 
-
-
 type OwnStateProps = {  
     onSubmit: (values: any) => void 
     match: any; 
 }
 
-// RouteComponentProps<z>
-
-type PropsTypes = MapStateProps & MapDistpathProps & OwnStateProps
-
-  
-  
+type PropsTypes = MapStateProps & MapDistpathProps & OwnStateProps 
 
 class ProfileConteiner extends React.Component<PropsTypes, OwnStateProps> {
 
     componentDidMount() { 
-      
-       this.props.setUsers(this.props.match.params.userId, this.props.generalId)
-    }
+      let {setUsers, match, generalId} = this.props      
+       setUsers(match.params.userId, generalId)
+    }   
 
-   
-
-    submit = (values: any) => {       
-         this.props.addPost(values.writeNewPost)
+    submit = (values: any) => {  
+        let {addPost} = this.props     
+         addPost(values.writeNewPost)
           values.writeNewPost = " "
       }
 

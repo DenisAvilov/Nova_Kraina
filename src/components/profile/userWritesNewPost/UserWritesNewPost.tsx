@@ -4,6 +4,7 @@ import { yourField } from '../../renderField/renderField';
 import { reduxForm, Field } from 'redux-form';
 import { InitialStateType } from '../../../redux/profile-reduce';
 import { PhotosType } from '../../../types/State_Profile_Reduce';
+import { UserProfileFoto } from '../user/User';
 let textarea =  yourField("textarea"), input = yourField("input");
 
 type FormForNewPostType = {
@@ -35,12 +36,13 @@ type UserWritesNewPostType = {
    }
 
 const UserWritesNewPost: React.FC<UserWritesNewPostType> = (props: UserWritesNewPostType) => { 
-
+let {photos} = props
     return (
         <div className={d.new_news}>
             <div className={d.your_news}>
                 <div className={d.your_user_logo}>
-                {  props.photos === undefined ?  <img src="https://i.pinimg.com/originals/04/a8/73/04a87347b071ec062a586e02c23f6221.png" />  : <img src={props.photos.small === null ? "https://www.w3schools.com/w3css/img_avatar3.png" : props.photos.small} />   }
+               { UserProfileFoto( photos, "small" )}
+                {/* {  photos === undefined ?  <img src="https://i.pinimg.com/originals/04/a8/73/04a87347b071ec062a586e02c23f6221.png" />  : <img src={photos.small === null ? "https://www.w3schools.com/w3css/img_avatar3.png" : photos.small} />   } */}
                    
                 </div>
                 <FormPost onSubmit={props.onSubmit}/>               

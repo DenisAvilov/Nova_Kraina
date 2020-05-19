@@ -1,6 +1,6 @@
 import React from 'react'
 import d from './renderField.module.css'
-import { Field, reduxForm } from 'redux-form'
+
 
 export const yourField = Tag =>({input,
     label,

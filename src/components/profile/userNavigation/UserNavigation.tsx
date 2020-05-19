@@ -2,7 +2,7 @@ import React from 'react';
 import d from './UserNavigation.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink } from 'react-router-dom';
-import { type } from 'os';
+
 
 type UserNavigationType ={
 

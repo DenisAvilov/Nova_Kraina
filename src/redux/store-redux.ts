@@ -1,8 +1,7 @@
 import { type } from 'os';
 
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import profile from "./profile-reduce";
-
 import friends from "./friends-reduce";
 import general from "./general";
 import  thunkMiddleware from 'redux-thunk'
@@ -22,21 +21,19 @@ const RootReducer = combineReducers({
 // return type store
 export type RootReducerType = ReturnType<typeof RootReducer>
 
-let test : RootReducerType
-
 //создание объекта store и просежуточного слоя который умеет разделять функции и объекты
-let store = createStore(RootReducer, applyMiddleware(thunkMiddleware) ); 
+// let store = createStore(RootReducer, applyMiddleware(thunkMiddleware) ); 
 
-declare global {
-    interface Window {
-        store:any;
-    }
-}
+ //@ts-ignore
+ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+ //@ts-ignore
+ const store = createStore(RootReducer, composeEnhancers(  compose(
+    applyMiddleware(thunkMiddleware)
+  ))) 
+  export default store
 
- window.store = store
 
 
-export default store;
 
 
  

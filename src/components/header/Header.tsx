@@ -1,26 +1,20 @@
 import * as React from 'react';
 import d from './Header.module.css';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { HeaderType } from '../../types/Header_type';
 
-type HeaderType = {
-    isYou: boolean | null
-    login: string | number | null
-    is_logOut: () => void
-}
+
 const Header: React.FC<HeaderType> = (props: HeaderType) => {
-  
+    let { is_logOut, login, isYou } = props
+
     return (
         <div className={d.wrap}>
-
-         <div className={d.wrap_left}>left</div>
-         <div className={d.wrap_center}>center</div>
-         <div className={d.wrap_right}>
-     
-         {props.isYou?  <div> <h2>{props.login}</h2> <span onClick={ () => props.is_logOut() } className={d.logout}> Выйти </span> </div> : <Link to="/login"> Войти </Link> } 
-         </div>
-        
-            
-       </div>
+            <div className={d.wrap_left}>left</div>
+            <div className={d.wrap_center}>center</div>
+            <div className={d.wrap_right}>
+                {isYou ? <div> <h2>{login}</h2> <span onClick={() => is_logOut()} className={d.logout}> Выйти </span> </div> : <Link to="/login"> Войти </Link>}
+            </div>
+        </div>
     )
 }
 

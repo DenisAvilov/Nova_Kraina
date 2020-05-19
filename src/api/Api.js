@@ -17,6 +17,7 @@ export const usersApi = {
       })
   },
   profile: (userProfileId) => {
+  
     return instance.get(`profile/` + userProfileId)
   },
   follow: (userId) => {

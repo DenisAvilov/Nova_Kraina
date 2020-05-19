@@ -16,18 +16,3 @@ export const getProfile = createSelector(UserProfile, (profile) => { return prof
 
 
 
-
-
-// post: state.profile.post,       
-// brief: state.profile.briefInformation,       
-// placeholder: state.profile.placeholder,            
-// user: state.profile,       
-// generalId: state.general.id
-
-// const getGeneralSelector = (state: RootReducerType) => {
-// return state.general;
-// }
-// //@ts-check
-// export const getGeneral = ( getGeneralSelector , state => {  return state.general; } ) 
-    
-    

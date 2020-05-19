@@ -4,29 +4,23 @@ import { Redirect } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { required, email, minValue5, minValueSim5 } from '../renderField/validationForm';
 import { yourField } from '../renderField/renderField';
-import { type } from 'os';
-import { GeneralType } from '../../types/State_General_Reduce';
+import { CreatNuwForm } from '../renderField/form-helper';
 
 let input = yourField("input");
 
 type FieldLoginFormType = {
     handleSubmit: any
-    error: string
-    
+    error: string    
 }
 
 const FieldLoginForm: React.FC<FieldLoginFormType> = (props: FieldLoginFormType) => {
     const { handleSubmit } = props;
     return (
-        <form onSubmit={handleSubmit} className={d.wrapForm + " " + (props.error ? d.errors : " ")}>
-            <div className={d.wrapField}>
-                <Field component={input} validate={[required, email]} name="email" type="email" label="Email"></Field>
-            </div>
-            <div className={d.wrapField}>
-                <Field component={input} validate={[required, minValue5, minValueSim5]} name="password" type="password" label="Password"></Field>
-            </div>
+        <form onSubmit={handleSubmit} className={d.wrapForm + " " + (props.error ? d.errors : " ")}>         
+               { CreatNuwForm( input , [required, email], "email", "email", "Email" )}
+               { CreatNuwForm( input , [required, minValue5, minValueSim5], "password", "password", "Password" )}             
             <div className={d.wrapChekbox}>
-                <Field component={input} name="remember_my" type="checkbox" label="Remember my"></Field>
+               { CreatNuwForm( input , [], "remember_my", "checkbox", "Остаться в системе" )} 
             </div>
             <div className={d.errorss}>
                 {props.error ?? props.error}

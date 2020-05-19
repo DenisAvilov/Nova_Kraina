@@ -3,7 +3,7 @@ import { getUsersData } from "./general";
 import { type } from "os";
 import { interLiteralString } from "../types/LiteralFromString";
 
-const INITIALIZATION_SUCCESS = "INITIALIZATION-SUCCESS";
+const INITIALIZATION_SUCCESS = "NOVA-KRAINA/INITIALIZATION-SUCCESS";
 
 type SuccessType = {
     success: boolean

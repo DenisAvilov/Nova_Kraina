@@ -1,25 +1,42 @@
 import * as React from 'react';
-import { ItemsType } from '../../redux/friends-reduce';
-import Friend from './Friend';
+import d from './Friends.module.css';
+import { NavLink } from 'react-router-dom';
+ import { ItemsType } from '../../redux/friends-reduce';
 
 type FriendsType ={
-  friends:  Array<ItemsType>  
+  user:  any  
   usersTracking: Array<number>
   friendUnFollow: (userID: number) => void
   friendFollow: (userID: number) => void  
 }
-const Friends: React.FC<FriendsType> = (props: FriendsType) => {
-let {friends, usersTracking, friendUnFollow, friendFollow} = props
+const Friend: React.FC<FriendsType> = (props: FriendsType) => {
+  let {user, usersTracking, friendUnFollow, friendFollow} = props
   return (
-    <div>
-      {friends.map(user =>  <Friend user={user} usersTracking={usersTracking}
-      friendUnFollow={friendUnFollow} friendFollow={friendFollow}
-      />  )} 
+    <div className={d.wrap}>     
+        <div className={d.friend_wrap}>
+          <div className={d.logo}>
+      <NavLink to={"Profile/" + user.id}>   <img src={user.photos.large === null ? "https://www.w3schools.com/w3css/img_avatar3.png" : user.photos.large} /> </NavLink>
+          </div>       
+          <h1 className={d.user_name}>  {user.name} </h1>
+          <div className={d.status}>
+            {user.followed
+              ? <button disabled={usersTracking.some(id => id == user.id)} onClick={() => { friendUnFollow(user.id)} 
+              }>
+                <span>Удалить из друзей</span>
+              </button>
+              : <button disabled={usersTracking.some(id => id == user.id)} onClick={() => { friendFollow(user.id)}}> 
+              Добавить в друзья </button>
+            }
+          </div>
+
+        </div>
+
+     
     </div>
   )
 }
 
-export default Friends; 
+export default Friend; 
 
 
 // var count = 10; //всего записей
