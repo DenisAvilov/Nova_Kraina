@@ -1,7 +1,10 @@
 import { GeneralType } from './../types/State_General_Reduce';
-import { usersApi, authApi } from "../api/Api";
+import {  authApi, ResultCode } from "../api/Api";
 import { stopSubmit } from "redux-form";
 import { interLiteralString } from '../types/LiteralFromString';
+import { RootReducerType } from './store-redux';
+import { ThunkAction } from 'redux-thunk';
+
 
 const TO_COME_IN = "NOVA-KRAINA/GENERAL/TO-COME-IN";
 const IS_OPEN = "NOVA-KRAINA/GENERAL/OPEN";
@@ -46,21 +49,25 @@ const general = (state = iniliset, action: ActionType): GeneralType => {
 }
 type ActionType = ReturnType<typeof to_came_in> | ReturnType<typeof is_open> | ReturnType<typeof is_close>
 
-export const to_came_in = (email: null | string, id: null | number, login: null | number | string, isYou: boolean) =>
+ const to_came_in = (email: null | string, id: null | number, login: null | number | string, isYou: boolean) =>
   ({ type: interLiteralString(TO_COME_IN), email, id, login, isYou } as const);
+ const is_open = () => ({ type: interLiteralString(IS_OPEN) } as const);
+ const is_close = () => ({ type: interLiteralString(IS_CLOSE) } as const);
 
-export const is_open = () => ({ type: interLiteralString(IS_OPEN) } as const);
-export const is_close = () => ({ type: interLiteralString(IS_CLOSE) } as const);
-export const getUsersData = () => async (distpach: any) => {
-  const response: any = await usersApi.authApi()
-  if (response.data.resultCode === 0) {
+type GeneralActionCreatorType = ThunkAction<Promise<void>, RootReducerType, unknown, ActionType>
+
+export const getUsersData = ():GeneralActionCreatorType => async (distpach) => {
+  const response = await authApi.authMe()  
+  if (response.data.resultCode === ResultCode.Success) {
     distpach(to_came_in(response.data.data.email, response.data.data.id, response.data.data.login, true))
   }
 }
-export const is_login = (email: string, password: number | string, rememberMe: boolean = false) => async (distpach: any) => {
-  const response: any = await authApi.authLogin(email, password, rememberMe)
-  if (response.data.resultCode === 0) {
-    const response: any = await authApi.authMe()
+
+export const is_login = (email: string, password: number | string, rememberMe: boolean = false , captcha: string):GeneralActionCreatorType  => 
+async (distpach) => {
+  const response = await authApi.authLogin(email, password, rememberMe, captcha)
+  if (response.data.resultCode === ResultCode.Success) {
+    const response = await authApi.authMe()
     distpach(to_came_in(response.data.data.email, response.data.data.id, response.data.data.login, true))
   }
   else {
@@ -69,10 +76,9 @@ export const is_login = (email: string, password: number | string, rememberMe: b
   }
 
 }
-export const is_logOut = () => async (distpach: any) => {
-  const response: any = await authApi.authDelete()
-
-  if (response.data.resultCode === 0) {
+export const is_logOut = ():GeneralActionCreatorType => async (distpach) => {
+  const response = await authApi.authDelete()
+  if (response.data.resultCode === ResultCode.Success) {
     distpach(to_came_in(null, null, null, false))
   }
 }

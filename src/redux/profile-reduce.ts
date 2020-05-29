@@ -1,6 +1,10 @@
-import { usersApi } from '../api/Api';
+import { usersFollow, profileApi } from '../api/Api';
 import { interLiteralString } from '../types/LiteralFromString';
 import { PostType, BriefType, ProfileType, } from './../types/State_Profile_Reduce';
+import { RootReducerType } from './store-redux';
+import { Dispatch } from 'react';
+import { ThunkAction } from 'redux-thunk';
+import { Action } from 'redux';
 const ADD_POST = 'NOVA-KRAINA/PROFILE-REDUCE/ADD-POST';
 const SET_USERS = 'NOVA-KRAINA/PROFILE-REDUCE/SET-USERS';
 let initialState = {
@@ -56,26 +60,12 @@ const profile = (state = initialState, action: ActionType): InitialStateType => 
     }
 }
 
-type AddPostType = {
-    type: typeof ADD_POST
-    newTextPost: string
-}
-
-export const addPost = (newTextPost: string): AddPostType => ({ type: interLiteralString(ADD_POST), newTextPost } as const);
-
-type SetUserType = {
-    type: typeof SET_USERS
-    profile: ProfileType
-}
-
-export const setUser = (profile: ProfileType): SetUserType => ({ type: interLiteralString(SET_USERS), profile } as const);
+export const addPost = (newTextPost: string) => ({ type: interLiteralString(ADD_POST), newTextPost } as const);
+export const setUser = (profile: ProfileType) => ({ type: interLiteralString(SET_USERS), profile } as const);
 
 //Если мы укажем в дженерике что-то не похожее на string — typescript выдаст нам ошибку
-
 // type onlyString<T> = T extends string ? string : never
-
 // const d:onlyString<string> = "42";
-
 //typeof returnтип Type the c creator'a
 //ReturnType return Type function тип экшена
 
@@ -83,17 +73,31 @@ type ActionType = ReturnType<typeof addPost> | ReturnType<typeof setUser>
 
 export default profile;
 
-export const setUsers = (userId: number | null, generalId: number | null) => {
+//Типизация дистпачей :> рефакторинг 
+// type DistpashType = Dispatch<ActionType>
+// type GetStateType = () => RootReducerType
+//sanka название из документаци \ сан-криейтор 
 
-    return async (dispatch: any) => {
+type ProfileActionCreatorType =  ThunkAction<Promise<void>, RootReducerType, unknown, ActionType> 
 
+export const setUsers = (userId: number | null, generalId: number | null): ProfileActionCreatorType => 
+// sank-action название из документации  \ санка  
+    async (dispatch, getState) => {
+//  let a = getState().friends
         let userProfileId = userId;
         if (!userProfileId) {
             userProfileId = generalId
         }
-        let response: any = await usersApi.profile(userProfileId)
+        let response = await profileApi.profileUserId(userProfileId)
         dispatch(setUser(response.data))
-    }
+   
 }
+
+export const func = ( urlImgLogo: {} ) =>  async (dispatch: any) => { 
+      alert(900)
+        dispatch()
+    
+}
+
 
 // export const exemple = (parametrs) => (dispatch) => { API }

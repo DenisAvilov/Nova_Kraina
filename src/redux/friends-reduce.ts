@@ -1,7 +1,9 @@
 
-import { usersApi } from "../api/Api";
+import { userApi, usersFollow, ResultCode } from "../api/Api";
 import { interLiteralString } from "../types/LiteralFromString";
 import { trackUsers } from '../untils/object-helpers';
+import { ThunkAction } from "redux-thunk";
+import { RootReducerType } from "./store-redux";
 
 const ADD_FRIEND = "NOVA-KRAINA/FRIENDS-REDUCE/ADD-FRIEND";
 const DEL_FRIEND = "NOVA-KRAINA/FRIENDS-REDUCE/DEL-FRIEND";
@@ -71,37 +73,30 @@ export const stateTrackingButton = (usersId: number, followed: boolean) =>
  ({ type: interLiteralString(TRACKING_BUTTON), usersId, followed } as const)
 
 export default friends;
-type dataType = {
-  error: null | string
-  items:  Array<ItemsType>
-  totalCount : number
-  __proto__: {}
-}
 
-export const getUsersThunkCreator = () => { 
-  return async (dispatch: any) => {
-   //возвращаю  санки
-   let data: dataType = await usersApi.usersGet()
+type FriendsAction = ThunkAction<Promise<void>, RootReducerType, unknown, ActionType>
+
+export const getUsersThunkCreator = ():FriendsAction => { 
+  return async (dispatch) => {  
+   let data = await userApi.usersGet()
         dispatch(setUsersFriends(data.items))    
   }
 }
-export const friendFollow = (userID: number) => {
+// thunkMiddleware 
+export const friendFollow = (userID: number):FriendsAction => {
   //возвращаю  санки
-  return async (dispatch: any) => {
+  return async (dispatch) => {
    dispatch(stateTrackingButton(userID, true))
-  let resultCode: number = await usersApi.follow(userID)
-  if (resultCode === 0) { dispatch(add_Friend(userID)) }
+  let resultCode = await usersFollow.follow(userID)
+  if (resultCode === ResultCode.Success) { dispatch(add_Friend(userID)) }
    dispatch(stateTrackingButton(userID, false))    
   }
 }
-export const friendUnFollow = (userID: number) => {
-  //возвращаю  санки
-  return async (dispatch: any) => {
-
+export const friendUnFollow = (userID: number):FriendsAction => { 
+  return async (dispatch) => {
      dispatch(stateTrackingButton(userID, true))
-
-   let resultCode: number = await  usersApi.unfollow(userID)
-    if (resultCode === 0) { dispatch(del_Friend(userID)) }
+   let resultCode = await  usersFollow.unfollow(userID)   
+    if (resultCode === ResultCode.Success) { dispatch(del_Friend(userID)) }
 
     dispatch(stateTrackingButton(userID, false))
   
