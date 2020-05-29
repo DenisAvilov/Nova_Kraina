@@ -10,18 +10,27 @@ import { InitialStateType } from '../../redux/profile-reduce';
 
 
 
+
 type PropsType ={      
     post: Array<PostType>,
     profile: ProfileType, 
     brief:  BriefType,
     placeholder: string
+    isMyPage: boolean | null 
+  
     onSubmit: (values: any) => void
-    addPost: (writeNewPost: string)=> void  
+    addPost: (writeNewPost: string)=> void 
+    func :  ((obj: {}) => {}) | undefined
+    
 }
+
+
+
 const Profile:React.FC<PropsType> = (props: PropsType) => {   
+ let {isMyPage, func} = props
 
     return (<div className={d.wrap}>
-        <User userData={props.profile} />
+        <User userData={props.profile} isMyPage={isMyPage}  />
         <UserNavigation />
         <div className={d.wrapper_state}>
             <UserState brief={props.brief} />

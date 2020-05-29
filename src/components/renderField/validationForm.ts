@@ -21,10 +21,10 @@ export const email = (value: T0) =>
  const minValue = (min: SimvolCount) => (value: SimvolCount) =>
     value && value < min ? `Символов не меньше ${min}` : undefined
 //@ts-ignore
- export const minValue5 = minValue(5)
+ export const minValue5 = minValue(4)
 
  const minValueSim = (min: SimvolCount) => (value: SimvolCount) =>
     //@ts-ignore
     value && value.length < min ? `Символов не меньше ${min}` : undefined
     //@ts-ignore
- export const minValueSim5 = minValueSim(5)
+ export const minValueSim5 = minValueSim(4)

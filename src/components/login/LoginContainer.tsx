@@ -10,7 +10,7 @@ type PropsType = {
     isYou: boolean | null    
 }
 type DistpathType = {
-    is_login: (email:string, password:string, remember_my:boolean) => void   
+    is_login: (email:string, password:string, remember_my:boolean, captcha: string ) => void   
 }
 type OwnStateType = {}
 type OllPropsType = PropsType & DistpathType & OwnStateType
@@ -19,9 +19,9 @@ class LoginContainer extends React.Component<OllPropsType>{
 
  
 
-    submit = (values: { email: string; password: string; remember_my: boolean; }) => {
+    submit = (values: { email: string; password: string; remember_my: boolean; captcha: string}) => {
        let  {is_login} = this.props
-        is_login(values.email, values.password, values.remember_my)       
+        is_login(values.email, values.password, values.remember_my, values.captcha)       
       }
        
     render(){

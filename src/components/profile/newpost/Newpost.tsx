@@ -14,7 +14,7 @@ const NewPost: React.FC<PropsType> = (props: PropsType) =>{
 return(  
     <>
     { props.post.map(p => 
-    <div className={d.post}>      
+    <div className={d.post}  key={p.id} >  
             <div className={d.post_title}>          
                    <div className={d.post_logo}>                 
                      <img src={p.avatarImg === null ? "https://www.w3schools.com/w3css/img_avatar3.png" : p.avatarImg}/>   

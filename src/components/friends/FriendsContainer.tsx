@@ -26,7 +26,7 @@ class FriendsContainer extends React.Component<PropsType> {
     }
 
     render() {
-        console.log("Render Friends()")
+       
         return (
             <Friends
                 friends={this.props.friends}
@@ -40,7 +40,7 @@ class FriendsContainer extends React.Component<PropsType> {
 //Проверка type того, что возвращяем mapStateToPropsType
 //Проверка type того, что принимаем RootReducerType
 let mapStateToProps = (store: RootReducerType) : mapStateToPropsType => {
-    console.log("mapStateToProps Friends()")
+   
     return {
         friends: store.friends.users,
         usersTracking: store.friends.usersTracking

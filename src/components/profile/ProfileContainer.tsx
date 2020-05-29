@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Profile from './Profile';
-import {  addPost, setUsers, InitialStateType } from '../../redux/profile-reduce';
+import {  addPost, setUsers, InitialStateType, } from '../../redux/profile-reduce';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
@@ -8,20 +8,21 @@ import { compose } from 'redux'
 import { RootReducerType } from '../../redux/store-redux';
 import {  BriefType, PostType, ProfileType } from '../../types/State_Profile_Reduce';
 import { getPost, getBrief, getPlaceholder,  getProfile, getOwnUserId } from '../../redux/selector-redux'
-import { type } from 'os';
+
 
 type MapStateProps = {     
    post: Array<PostType>,       
    brief: BriefType,       
    placeholder: string,            
    profile: ProfileType,       
-   generalId:   number | null   
+   generalId:   number | null     
    
 }
 
 type MapDistpathProps = {
     setUsers: (userId: number, generalId: number | null  ) => void
     addPost: (writeNewPost: string) => void
+   
     
 }
 
@@ -34,17 +35,31 @@ type  MathType = {
 
 type OwnStateProps = {  
     onSubmit: (values: any) => void 
-    match: any; 
+    match: any
+    isMyPage: boolean | null 
+   
 }
 
 type PropsTypes = MapStateProps & MapDistpathProps & OwnStateProps 
 
 class ProfileConteiner extends React.Component<PropsTypes, OwnStateProps> {
-
-    componentDidMount() { 
-      let {setUsers, match, generalId} = this.props      
+    func: ((obj: {}) => {}) | undefined; 
+ 
+    drawComponent (){
+        let {setUsers, match, generalId} = this.props      
        setUsers(match.params.userId, generalId)
     }   
+
+    componentDidMount() { 
+       this.drawComponent()      
+    }   
+
+     componentDidUpdate(prevProps:any ){
+         let {setUsers, match, generalId} = this.props
+         if(match.params.userId !== prevProps.match.params.userId){
+            setUsers(match.params.userId, generalId)
+         }
+     }
 
     submit = (values: any) => {  
         let {addPost} = this.props     
@@ -52,8 +67,9 @@ class ProfileConteiner extends React.Component<PropsTypes, OwnStateProps> {
           values.writeNewPost = " "
       }
 
-    render() {      
-        return  <Profile {...this.props}  onSubmit={this.submit} /> 
+    render() {    
+        return  <Profile {...this.props}  onSubmit={this.submit} 
+        isMyPage={!this.props.match.params.userId} func={this.func}/> 
     }
 }
 let mapStateToProps = (state: RootReducerType) : MapStateProps  => {   
@@ -70,7 +86,7 @@ export default compose(
     withRouter,
     withAuthRedirect,
     connect<MapStateProps, MapDistpathProps, OwnStateProps, RootReducerType>(mapStateToProps,
-         {  addPost, setUsers })
+         {  addPost, setUsers,  })
 )(ProfileConteiner)
 
 
