@@ -12,7 +12,7 @@ type PropsType = {
 const NewPost: React.FC<PropsType> = (props: PropsType) =>{
 
 return(  
-    <>
+    <div className={d.posts}>
     { props.post.map(p => 
     <div className={d.post}  key={p.id} >  
             <div className={d.post_title}>          
@@ -37,7 +37,7 @@ return(
         </div>
         )
     }    
-      </> 
+      </div> 
 )
 }
 

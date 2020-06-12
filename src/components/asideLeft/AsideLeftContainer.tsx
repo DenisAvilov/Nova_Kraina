@@ -3,18 +3,20 @@ import { connect } from 'react-redux';
 import AsideLeft from './AsideLeft';
 import { RootReducerType } from '../../redux/store-redux';
 import { GeneralType } from '../../types/State_General_Reduce';
+import { emailUser } from '../../redux/selector-redux';
 
 type ContainerPropsType = {
-
+    emailUser: string | null
     user: GeneralType
 }
 
 class AsideLeftContainer extends React.Component<ContainerPropsType>{
 
 
-    render(){
+    render(){   
+        let {emailUser, user} = this.props     
         return(
-            <AsideLeft user={this.props.user}/>
+            <AsideLeft user={user} emailUser={emailUser}/>
         )
     }
 
@@ -22,7 +24,8 @@ class AsideLeftContainer extends React.Component<ContainerPropsType>{
 let  mapStateToProps = (store: RootReducerType) : ContainerPropsType=>{
 
     return{
-        user: store.general
+        user: store.general,
+        emailUser: emailUser(store)
     }
 }
 

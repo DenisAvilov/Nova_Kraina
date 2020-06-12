@@ -9,6 +9,8 @@ const ADD_FRIEND = "NOVA-KRAINA/FRIENDS-REDUCE/ADD-FRIEND";
 const DEL_FRIEND = "NOVA-KRAINA/FRIENDS-REDUCE/DEL-FRIEND";
 const SET_USERS_FRIENDS = "NOVA-KRAINA/FRIENDS-REDUCE/SET-USERS-FRIENDS";
 const TRACKING_BUTTON = "NOVA-KRAINA/FRIENDS-REDUCE/TRACKING-BUTTON";
+const PAGINATION_CHANGE = "NOVA-KRAINA/FRIENDS-REDUCE/PAGINATION-CHANGE"
+ 
 
 //[] это певдо истина
 type PhotosType = {
@@ -17,16 +19,21 @@ type PhotosType = {
 }
 export type ItemsType = {
   followed: boolean
-  id: number
-  name: string
-  photos: PhotosType
-  status: null
+  id: number 
+  name: string | null
+  photos: PhotosType 
+  status: string | null
   uniqueUrlName: null
 }
 
 let iniliset = {
   users: [] as Array<ItemsType>,
   usersTracking: [] as Array<number>,  
+  count: 10, //count viws users in own page
+  page: 1,  
+  term: '',
+  totalCount: 0,
+  
 }
 
 export type InilisetType = typeof iniliset
@@ -45,10 +52,18 @@ const friends = (state = iniliset , action: ActionType): InilisetType => {
         users:  trackUsers(state.users,"id", action.userId, {followed: false})   
       }
     }
-    case SET_USERS_FRIENDS: {
+    case SET_USERS_FRIENDS: {     
       return {
         ...state,
-        users: action.items
+        users: action.data.items,
+        totalCount: action.data.totalCount       
+      }
+    }
+    case PAGINATION_CHANGE: {
+     
+      return {
+        ...state,       
+        page: action.page
       }
     }
     case TRACKING_BUTTON: {
@@ -64,11 +79,15 @@ const friends = (state = iniliset , action: ActionType): InilisetType => {
 }
 
 type ActionType = ReturnType<typeof add_Friend> | ReturnType<typeof del_Friend> | ReturnType<typeof setUsersFriends> |
-  ReturnType<typeof stateTrackingButton>
+  ReturnType<typeof stateTrackingButton>  | ReturnType< typeof pagination>
 
 export const add_Friend = (userId: number) => ({ type: interLiteralString(ADD_FRIEND), userId } as const);
 export const del_Friend = (userId: number) => ({ type: interLiteralString(DEL_FRIEND), userId } as const);
-export const setUsersFriends = (items: any) => ({ type: interLiteralString(SET_USERS_FRIENDS), items } as const);
+
+export const setUsersFriends = (data: any) => ({ type: interLiteralString(SET_USERS_FRIENDS), data } as const);
+
+export const pagination = ( page  : number ) => ({type: interLiteralString(PAGINATION_CHANGE), page } as const)
+
 export const stateTrackingButton = (usersId: number, followed: boolean) =>
  ({ type: interLiteralString(TRACKING_BUTTON), usersId, followed } as const)
 
@@ -76,10 +95,21 @@ export default friends;
 
 type FriendsAction = ThunkAction<Promise<void>, RootReducerType, unknown, ActionType>
 
+
+
+export const viewCountPage = (countPage: number):FriendsAction  => {
+ 
+  return async (dispatch) => {    
+    let data = await userApi.usersGet(countPage)
+    dispatch(setUsersFriends(data)) 
+  } 
+}
+
+
 export const getUsersThunkCreator = ():FriendsAction => { 
   return async (dispatch) => {  
-   let data = await userApi.usersGet()
-        dispatch(setUsersFriends(data.items))    
+   let data = await userApi.usersGet()         
+        dispatch(setUsersFriends(data))    
   }
 }
 // thunkMiddleware 
@@ -102,3 +132,4 @@ export const friendUnFollow = (userID: number):FriendsAction => {
   
   }
 }
+

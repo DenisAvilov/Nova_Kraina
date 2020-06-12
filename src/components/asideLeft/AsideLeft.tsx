@@ -6,19 +6,21 @@ import { GeneralType } from '../../types/State_General_Reduce';
 
 type AsideLeftType = {
     user: GeneralType
+    emailUser: string | null
 }
-
 const AsideLeft: React.FC<AsideLeftType>  = (props: AsideLeftType) => {
+    const {emailUser} = props
     return (
         <div className={d.wrap}>
             <div className={d.title}>
                 <div className={d.title_head}>
                     <h1>Главная</h1>
+                   
                 </div>
                 <div className={d.title_button}><span>Создать</span> </div>
             </div>
             <ul className={d.nav}>
-                <li><NavLink to="/profile">                   
+                <li><NavLink to={'/profile'}>                   
                         
                              <div className={d.nav_user_wrap}>
                                 <div className={d.nav_user_logo}>

@@ -2,7 +2,9 @@
     background-color: #242526;
     border-radius: 8px;
     grid-area: state;
-    padding: 20px 15px;
+    padding: 20px 15px; 
+    margin-right: 10px;
+    
 }
 
 .state_item {

@@ -1,13 +1,26 @@
 .post {
     height: 505px;
-    width: 70%;
-    margin: 0 auto;
+    width: 100%;
+    margin-left :  auto;
     border-radius: 50px;
     background: #242526;
     border-radius: 8px;
     box-sizing: border-box;
     overflow: hidden;
+   
 }
+
+.posts {
+    grid-area: posts;
+    background-color: inherit;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 15px;
+    padding-bottom: 50px;
+    color: red
+}
+
 
 .post_title {
     display: flex;

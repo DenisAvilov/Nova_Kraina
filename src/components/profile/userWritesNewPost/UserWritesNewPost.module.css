@@ -7,6 +7,7 @@
     padding: 11px;
     height: 60px;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .your_user_logo {
@@ -47,7 +48,7 @@
 }
  
 .write_news textarea {
-    width: 300px;
+    width: 250px;
     margin-right: 10px;
     resize: none;
     padding: 6px 0 6px 6px;

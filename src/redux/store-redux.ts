@@ -4,7 +4,7 @@ import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import profile from "./profile-reduce";
 import friends from "./friends-reduce";
 import general from "./general";
-import  thunkMiddleware from 'redux-thunk'
+import  thunkMiddleware from 'redux-thunk'  // this a sanka, function которая что то делает
 import { reducer as formReducer } from 'redux-form'
 import initialization from "./initialization-reduce";
 
@@ -26,7 +26,7 @@ export type RootReducerType = ReturnType<typeof RootReducer>
 
  //@ts-ignore
  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
- //@ts-ignore
+
  const store = createStore(RootReducer, composeEnhancers(  compose(
     applyMiddleware(thunkMiddleware)
   ))) 

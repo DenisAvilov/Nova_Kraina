@@ -1,6 +1,6 @@
 .header {
     position: relative;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
     grid-area: he;
 }
 
@@ -11,13 +11,20 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+.header_title_name{    
+    left: -39%;
+
+}
+.header_title_name h1{
+    text-align:  center;
+    height: 33px;
+}
 
 .header_logo_wrap {
-    position: absolute;
-    height: 176px;
-    width: 176px;
-    bottom: -10px;
-    left: 39%;
+    position: absolute;    
+    /* width: 100%; */
+    bottom: 46px;
+    left: 40%;
     border-radius: 50%;
     text-align: center;
 }
@@ -27,6 +34,10 @@
     border-radius: 50%;
     border: 3px solid #000;
     overflow: hidden;
+    width: 176px;
+    height: 176px;
+    box-sizing:border-box;
+    position: relative;
 }
 
 .header_logo img {
@@ -36,34 +47,54 @@
     object-fit: fill;
     cursor: pointer;
 }
-
 .header_logo:hover img {
     opacity: 0.9;
     transition: opacity .3s ease;
 }
-
-.header_logo_download {
+.header_add_img_logo {
     padding: 5px;
     background-color: rgba(206, 206, 206, 0.1);
     position: absolute;
-    right: 19px;
-    bottom: 3px;
+    right: 36px;
+    bottom: 0;
     border-radius: 10em;
     cursor: pointer;
 }
-
-.header_logo_download:hover {
+.header_add_img_logo:hover {
     background-color: rgba(206, 206, 206, 0.3);
     transition: background-color .3s ease;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .add_biography {
     cursor: pointer;
-    color: #385898;
-    border-bottom: 1px solid inherit;
+    color: #385898;  
+    text-align: center;   
+    max-width: 400px;
+    margin: 0 auto;
+    height: 20px;
+    display: block;
 }
-
-.add_biography:hover {
-    border-bottom: 1px solid #385898;
-    transition: border-bottom .3s ease;
+.add_biography p{
+    margin: 0 auto;
+    display: inline-block; 
+   
+}
+.add_biography p:hover{
+    color: red;   
+    transition: color .3s ease;
 }

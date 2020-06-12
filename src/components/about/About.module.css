@@ -1,0 +1,23 @@
+:root{
+    --nk-border-separate:  #3e4042;
+}
+
+.wrapper_information{
+    background-color: #242526;
+    border-radius: 8px;     
+    grid-area: aboutDetail;  
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+h1{font-size: 1.25rem;}
+.information_nav{
+    flex-grow: 1;
+    border-right: 1px solid var(--nk-border-separate);
+    padding: 20px 15px;
+}
+.information_state{
+    flex-grow: 10;
+    padding: 20px 15px;
+}

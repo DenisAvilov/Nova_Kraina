@@ -1,51 +1,37 @@
 import * as React from 'react';
 import d from './Profile.module.css';
 import User from './user/User';
-import UserNavigation from './userNavigation/UserNavigation';
-import UserWritesNewPost from './userWritesNewPost/UserWritesNewPost';
-import UserState from './userState/UserState';
-import { BriefType, PostType, PhotosType, ProfileType } from '../../types/State_Profile_Reduce';
-import NewPost from './newpost/Newpost';
-import { InitialStateType } from '../../redux/profile-reduce';
-
-
-
+import { BriefType, PostType,  ProfileType } from '../../types/State_Profile_Reduce';
+import ProfileUserNavigation from '../ProfileUserNavigation/ProfileUserNavigation';
+import { Route, Switch, useRouteMatch} from 'react-router-dom';
+import ProfilePage from './ProfilePage';
+import AboutContainer from '../about/AboutContainer';
 
 type PropsType ={      
-    post: Array<PostType>,
-    profile: ProfileType, 
-    brief:  BriefType,
-    placeholder: string
-    isMyPage: boolean | null 
-  
+    post: Array<PostType>, profile: ProfileType, brief:  BriefType,
+    placeholder: string,  isMyPage: boolean | null, status: string 
+    userProfileId: number | null, emailUser: string | null
+    saveFoto: (file: File) => void
+    statusСhangedSuccess: (status: string) => void    
     onSubmit: (values: any) => void
-    addPost: (writeNewPost: string)=> void 
-    func :  ((obj: {}) => {}) | undefined
-    
+    addPost: (writeNewPost: string)=> void     
 }
+const Profile:React.FC<PropsType> = (props: PropsType) => {  
 
 
-
-const Profile:React.FC<PropsType> = (props: PropsType) => {   
- let {isMyPage, func} = props
+ let {emailUser ,isMyPage, status, statusСhangedSuccess, saveFoto, profile, addPost, brief, profile:{photos}, onSubmit, post, userProfileId} = props
 
     return (<div className={d.wrap}>
-        <User userData={props.profile} isMyPage={isMyPage}  />
-        <UserNavigation />
-        <div className={d.wrapper_state}>
-            <UserState brief={props.brief} />
-            <UserWritesNewPost
-                photos={props.profile.photos}
-                onSubmit={props.onSubmit}                         
-               />
-            <div className={d.posts}>
-               <NewPost post={props.post} /> 
-            </div>
+     
+            <User userData={profile} isMyPage={isMyPage} status={status} statusСhangedSuccess={statusСhangedSuccess} saveFoto={saveFoto}/>
+            <ProfileUserNavigation  emailUser={emailUser}  /> 
+               
+            <Route  exact path={ '/profile/:userId?' } render={() => 
+                        <ProfilePage brief={brief} photos={photos} post={post} onSubmit={onSubmit} profile={profile} addPost={addPost} />}>                   
+             </Route>                  
+                    <Route exact path={'/profile/about'} render={() => <AboutContainer />} />                 
               
-        </div> 
-    </div>
-
+          </div>
     )
 }
-
 export default Profile;

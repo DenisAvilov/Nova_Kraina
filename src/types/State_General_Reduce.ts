@@ -6,7 +6,8 @@ let GeneralType = {
     email: null as string | null,
     login: null as string | number | null,
     isYou: null as boolean | null,
-    isOpen: null as boolean | null
+    isOpen: null as boolean | null,
+    captcha:  null as string | null
   }
 
 export type GeneralType = typeof GeneralType

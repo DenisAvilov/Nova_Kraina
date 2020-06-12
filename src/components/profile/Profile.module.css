@@ -1,30 +1,15 @@
-.wrap {
-    /* border: 1px solid #fff;  */
-    
-    grid-area: m;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 50px auto;
-    grid-template-areas: "he he" "nav nav" "s s";
+.wrap {   
+    position: relative;  
+    width: 100%; 
+}
+.profilePage_wrapper {
+    display: flex;   
 }
 
-.wrapper_state {
+.profileUserState_wrap{
     position: relative;
-    grid-area: s;
-    display: grid;
-    padding: 0 10px;
-    grid-gap: 15px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50px 150px 1rf;
-    grid-template-areas: "state new" "posts posts";
+   
 }
-
-.posts {
-    grid-area: posts;
-    background-color: inherit;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-gap: 15px;
-    padding-bottom: 50px;
+.profilePost_wrap{
+    width: 50%;   
 }

@@ -1,4 +1,5 @@
 import  React  from 'react';
+import { ResultCode } from '../api/Api';
 
 
 export type ContactsType = {
@@ -42,6 +43,11 @@ export type ProfileType = {
     photos: PhotosType | undefined 
 }
 
+export type ResponseType< d = {}, RC = ResultCode > = {
+    resultCode: RC
+    messages: Array<string>
+    data: d
+  }
 
 
 
