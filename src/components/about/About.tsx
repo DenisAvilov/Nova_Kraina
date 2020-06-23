@@ -1,17 +1,17 @@
 import * as React from 'react'
-import { AboutDetail } from './AboutDetail'
-import { ProfileType } from '../../types/State_Profile_Reduce'
+import { AboutDetail } from  './aboutDetail/AboutDetail'
+import { ProfileType, BriefType } from '../../types/State_Profile_Reduce'
 
 type AboutType = { 
     aboutDetail: ProfileType
-  
+    brief: BriefType
+    
+    onSubmit: any
 }
-export const About: React.FC<AboutType> = (props: AboutType) => { 
-   let {aboutDetail} = props
-    return (<>    
-           <AboutDetail aboutDetail={aboutDetail}/>     
-           <AboutDetail aboutDetail={aboutDetail}/>     
-           <AboutDetail aboutDetail={aboutDetail}/>     
-           </> 
-    )
+export const About: React.FC<AboutType> = ( {aboutDetail, brief, onSubmit}: AboutType) => { 
+  
+    return (   <React.Fragment>  
+                  <AboutDetail aboutDetail={aboutDetail} brief={brief}  onSubmit={onSubmit}/>                 
+             </React.Fragment>
+            )
 }

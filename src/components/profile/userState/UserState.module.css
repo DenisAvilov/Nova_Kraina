@@ -16,7 +16,9 @@
 .state_inform {
     padding-left: 10px;
 }
-
+.state_inform span{
+ display: inline-block;
+}
 .state_item .map {
     margin-left: 2px;
     margin-right: 4px;

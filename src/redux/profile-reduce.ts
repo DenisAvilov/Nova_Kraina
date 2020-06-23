@@ -6,17 +6,19 @@ import { interLiteralString } from '../types/LiteralFromString'
 import { PostType, BriefType, ProfileType, PhotosType, } from './../types/State_Profile_Reduce'
 import { RootReducerType } from './store-redux'
 import { ThunkAction } from 'redux-thunk'
-import general from './general';
+import general from './general'
 
 const ADD_POST = 'NOVA-KRAINA/PROFILE-REDUCE/ADD-POST'
 const SET_USERS = 'NOVA-KRAINA/PROFILE-REDUCE/SET-USERS'
 const STATUS_CHANGE = 'NOVA-KRAINA/PROFILE-REDUCE/STATUS-CHANGE'
 const STATUS_GET = 'NOVA-KRAINA/PROFILE-REDUCE/STATUS-GET'
 const SAVE_FOTO = 'NOVA-KRAINA/PROFILE-REDUCE/SAVE-FOTO'
+const SAVE_PROFILE_DATA = 'NOVA-KRAINA/PROFILE-REDUCE/SAVE-PROFILE-DATA'
+
 
 let initialState = {
     profile: {} as ProfileType,
-    status: "Добавьте информацию",
+    status: "Добавьте информацию",    
     post: [{
         id: 0,
         avatarImg: "https://www.w3schools.com/w3css/img_avatar3.png",
@@ -58,6 +60,7 @@ const profile = (state = initialState, action: ActionType): InitialStateType => 
             }
         }
         case SET_USERS: {
+          
             return {
                 ...state,
                 profile: action.profile
@@ -77,13 +80,19 @@ const profile = (state = initialState, action: ActionType): InitialStateType => 
             }
         }
         case SAVE_FOTO: {
-            debugger
+        
             return {
                 ...state,
               profile:  {...state.profile, photos : action.foto}
              }
         }
-
+        case SAVE_PROFILE_DATA: {
+           
+            return {
+                ...state,
+              profile:  action.profile
+             }
+        }
         default:
             return state;
     }
@@ -95,7 +104,7 @@ export const statusСhanged = (status: string) => ({ type: interLiteralString(ST
 export const statusSuccess = (status: string) => ({ type: interLiteralString(STATUS_GET), status } as const);
 export const saveFotoSuccess = (foto: any ) => ({ type: interLiteralString(SAVE_FOTO), foto } as const);
 
-
+export const saveProfileData = (profile: ProfileType ) => ({ type: interLiteralString(SAVE_PROFILE_DATA), profile } as const);
 
 //Если мы укажем в дженерике что-то не похожее на string — typescript выдаст нам ошибку
 // type onlyString<T> = T extends string ? string : never
@@ -104,7 +113,8 @@ export const saveFotoSuccess = (foto: any ) => ({ type: interLiteralString(SAVE_
 //ReturnType return Type function тип экшена
 
 type ActionType = ReturnType<typeof addPost> | ReturnType<typeof setUser> |
-                  ReturnType<typeof statusСhanged> | ReturnType<typeof statusSuccess> | ReturnType<typeof saveFotoSuccess>
+                  ReturnType<typeof statusСhanged> | ReturnType<typeof statusSuccess> | ReturnType<typeof saveFotoSuccess> | 
+                   ReturnType<typeof saveProfileData>  
 
 export default profile;
 
@@ -115,6 +125,20 @@ export default profile;
 
 type ProfileActionCreatorType =  ThunkAction<Promise<void>, RootReducerType, unknown, ActionType> 
 
+
+export const putProfileData = ( values: ProfileType ): ProfileActionCreatorType => 
+// sank-action название из документации  \ санка  
+    async ( dispatch ) => {      
+        let response = await profileApi.profile(values)
+        debugger
+        if(response.resultCode === ResultCode.Success){ 
+
+            dispatch(saveProfileData(response.data) )
+        }
+
+        
+         
+}
 
 
 export const setUsers = (userId: number | null , generalId: number | null ): ProfileActionCreatorType => 
@@ -127,9 +151,11 @@ export const setUsers = (userId: number | null , generalId: number | null ): Pro
         }
         let response = await profileApi.profileUserId(userProfileId)
         dispatch(setUser(response.data)) 
-         let data = await profileApi.profileStatusUserId(userProfileId)       
+         let data = await profileApi.profileStatusUserId(userProfileId)    
+      
          dispatch(statusSuccess(data))
 }
+
 export const statusСhangedSuccess = (status: string): ProfileActionCreatorType =>   
     async (dispatch, getState) => {
         let data = await profileApi.profileStatus(status)
@@ -148,6 +174,7 @@ export const saveFoto =  ( file: File): ProfileActionCreatorType =>  async (disp
        }
          
 }
+
 
 
 // export const exemple = (parametrs) => (dispatch) => { API }

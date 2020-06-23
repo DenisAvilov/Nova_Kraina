@@ -40,11 +40,13 @@ class ProfileConteiner extends React.Component<PropsTypes, OwnStateProps> {
 
     drawComponent (){  
         let {setUsers, match, generalId, emailUser} = this.props  
+
+        
                    setUsers(match.params.userId, generalId,)   }
 
-    componentDidMount() {        
-       this.drawComponent()      
-    }
+     componentDidMount() {        
+        this.drawComponent()      
+     }
     componentDidUpdate(prevProps:any ){ 
             let {setUsers, match, generalId } = this.props    
             //беру URL

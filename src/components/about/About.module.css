@@ -1,5 +1,6 @@
 :root{
     --nk-border-separate:  #3e4042;
+    --accent : hsl(214, 100%, 59%);
 }
 
 .wrapper_information{
@@ -8,12 +9,14 @@
     grid-area: aboutDetail;  
     width: 100%;
     display: flex;
+    min-height: 200px;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 h1{font-size: 1.25rem;}
 .information_nav{
-    flex-grow: 1;
+    flex-basis: 250px;
+    max-width: 250px; 
     border-right: 1px solid var(--nk-border-separate);
     padding: 20px 15px;
 }
@@ -21,3 +24,17 @@ h1{font-size: 1.25rem;}
     flex-grow: 10;
     padding: 20px 15px;
 }
+
+.h2{
+    font-size: 1.1em;
+    margin-bottom: 13px;
+}
+.wrapper_information ul {
+    padding-left: 0;
+    margin-top: 0;
+}
+.state_inform span{
+    display: inline-block;
+}
+ /* BUTTON LINk IN ABOUTDETAIL */
+

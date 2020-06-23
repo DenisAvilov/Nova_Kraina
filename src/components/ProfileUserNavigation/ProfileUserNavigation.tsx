@@ -16,11 +16,11 @@ const ProfileUserNavigation: React.FC<UserNavigationType> = (props: UserNavigati
     return (
         <div className={d.nav}>
             <div className={d.nav_info}>
-                <NavLink exact to= {'/profile' } activeStyle={{backgroundColor: "blue"}}>Хроника</NavLink>
-                <NavLink exact to= { '/profile/about'} activeStyle={{backgroundColor: "blue"}}>Информация</NavLink>
-                <NavLink to={  '/profile/friends'} activeStyle={{backgroundColor: "blue"}}>Друзья</NavLink>  
-                <NavLink to={  '/profile/fotos'} activeStyle={{backgroundColor: "blue"}}>Фото</NavLink>
-            </div>
+                <NavLink exact to= {'/profile' } activeStyle={{backgroundColor: "rgb(46, 46, 46)"}}>Хроника</NavLink>
+                <NavLink  to= { '/profile/about'} activeStyle={{backgroundColor: "rgb(46, 46, 46)"}}>Информация</NavLink>
+                <NavLink to={  '/profile/friends'} activeStyle={{backgroundColor: "rgb(46, 46, 46)"}}>Друзья</NavLink>  
+                <NavLink to={  '/profile/fotos'} activeStyle={{backgroundColor: "rgb(46, 46, 46)"}}>Фото</NavLink>
+            </div>            
             <div className={d.nav_edit_profile}>Редоктировать проф...</div>
 
         </div>

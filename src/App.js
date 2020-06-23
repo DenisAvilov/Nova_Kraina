@@ -16,14 +16,10 @@ import LoginContainer from './components/login/LoginContainer';
 import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { is_initialization } from './redux/initialization-reduce';
-import { AboutWorkAndEducation } from './components/about/About_work_and_education';
 import { emailUser } from './redux/selector-redux';
- 
-
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
      faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
-
 
 class App extends React.Component{ 
        componentDidMount(){   this.props.is_initialization()  
@@ -49,9 +45,9 @@ class App extends React.Component{
             <AsideRight />
             <Switch>
                <Route exact path='/'render={() => <Main />}/>  
-               <Route  exact path= {'/profile/:userId?'}  render={() => <ProfileConteiner  />} />  
+               <Route exact path= {'/profile/:userId?'}  render={() => <ProfileConteiner  />} /> 
                <Route path='/login' render={() => < LoginContainer />} />
-               <Route path='/friends' render={() => < FriendsContainer />} />          
+               <Route path='/friends' render={() => < FriendsContainer />} />                       
             </Switch>
            </div>
         );

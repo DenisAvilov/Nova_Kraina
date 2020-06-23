@@ -41,6 +41,7 @@ export type ProfileType = {
     fullName: string ,
     contacts:  ContactsType,
     photos: PhotosType | undefined 
+    aboutMe: string
 }
 
 export type ResponseType< d = {}, RC = ResultCode > = {

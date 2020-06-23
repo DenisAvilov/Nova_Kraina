@@ -1,11 +1,18 @@
 import * as React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
-type AboutNavLinkType= {}
+type AboutNavLinkType= {
+    setShowContent: React.Dispatch<React.SetStateAction<boolean>>
+    showContent: boolean
+}
 export const AboutNavLink:React.FC<AboutNavLinkType> = (props: AboutNavLinkType) =>{
-    return(<React.Fragment>
-            <div><NavLink to={'/about'} >Общие свединия  </NavLink> </div>
-            <div> <NavLink to={'about_works_and_education'} > Работа и образование</NavLink> </div>    
+
+    return(<React.Fragment> 
+            
+            {/* <Link to={'/profile/about-works-and-education'} > Общие свединия </Link> */}
+
+            {/* <div onClick={ () => props.setShowContent( !props.showContent ) }> Работа и образование </div> */}
+
         </React.Fragment>
     )
 }

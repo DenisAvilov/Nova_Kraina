@@ -6,18 +6,19 @@ import { Field, reduxForm } from 'redux-form'
 export type FieldValidatorTypeString = (value: string) => string | undefined
 
 
-export const required: FieldValidatorTypeString = (value) =>
-  (value ? undefined : 'Обязательное поле')
+// export const required = (value: string): string | undefined => (value ? undefined : 'Обязательное поле')
+// required это валидатор типа FieldValidatorTypeString
+export const required: FieldValidatorTypeString = (value) => (value ? undefined : 'Обязательное поле')
 
 export const email: FieldValidatorTypeString = (value) =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Не валидный email'
     : undefined
 
-const minValue = (min: number): FieldValidatorTypeString => (value) =>
+ const minValue = (min: number): FieldValidatorTypeString => (value) =>
   value && value.length < min ? `Символов не меньше ${min}` : undefined
 
-export const minValue5 = minValue(4)
+ export const minValue5 = minValue(4)
 
 
 

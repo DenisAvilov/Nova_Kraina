@@ -6,6 +6,7 @@ import ProfileUserNavigation from '../ProfileUserNavigation/ProfileUserNavigatio
 import { Route, Switch, useRouteMatch} from 'react-router-dom';
 import ProfilePage from './ProfilePage';
 import AboutContainer from '../about/AboutContainer';
+// import { AboutDetail } from '../about/aboutDetail/AboutDetail';
 
 type PropsType ={      
     post: Array<PostType>, profile: ProfileType, brief:  BriefType,
@@ -22,15 +23,17 @@ const Profile:React.FC<PropsType> = (props: PropsType) => {
  let {emailUser ,isMyPage, status, statusСhangedSuccess, saveFoto, profile, addPost, brief, profile:{photos}, onSubmit, post, userProfileId} = props
 
     return (<div className={d.wrap}>
-     
+         
             <User userData={profile} isMyPage={isMyPage} status={status} statusСhangedSuccess={statusСhangedSuccess} saveFoto={saveFoto}/>
             <ProfileUserNavigation  emailUser={emailUser}  /> 
-               
-            <Route  exact path={ '/profile/:userId?' } render={() => 
-                        <ProfilePage brief={brief} photos={photos} post={post} onSubmit={onSubmit} profile={profile} addPost={addPost} />}>                   
-             </Route>                  
-                    <Route exact path={'/profile/about'} render={() => <AboutContainer />} />                 
-              
+            
+            <Route exact path={'/profile'} render={() =>
+                   <ProfilePage brief={brief} photos={photos} post={post} onSubmit={onSubmit} profile={profile} addPost={addPost} /> }/> 
+         
+            <Route  path={'/profile/about'} render={() => <AboutContainer />} />
+            <Route  path={'/profile/about_overview'} render={() => <AboutContainer />} />
+            <Route  path={'/profile/about_work_and_education'} render={() => <AboutContainer />} />
+
           </div>
     )
 }

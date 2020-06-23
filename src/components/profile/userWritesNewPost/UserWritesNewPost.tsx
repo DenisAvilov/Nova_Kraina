@@ -1,12 +1,12 @@
 import * as React from 'react';
 import d from './UserWritesNewPost.module.css';
-import { YourField } from '../../renderField/renderField';
+import { renderField } from '../../renderField/renderField';
 import { reduxForm, Field } from 'redux-form';
 import { InitialStateType } from '../../../redux/profile-reduce';
 import { PhotosType, PostType } from '../../../types/State_Profile_Reduce';
 import { UserProfileFoto } from '../user/User';
 import NewPost from '../newpost/Newpost';
-let textarea =  YourField("textarea"), input = YourField("input");
+let textarea =  renderField("textarea"), input = renderField("input");
 
 type FormForNewPostType = {
     handleSubmit: any   

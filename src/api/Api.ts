@@ -45,14 +45,12 @@ type ProfileResponseUserId = {
   fullName: string ,
   contacts:  ContactsType,
   photos: PhotosType 
+  aboutMe: string
 }
 
-
-
-
 export const profileApi = {
-  profile: (data: ProfileData) => {   
-    return instance.put<ResponseType>(`profile`, data )
+  profile: (data: ProfileData) => {  
+    return instance.put<ResponseType<ProfileType>>(`profile`, data ).then( response => response.data)
   },
   profilePhoto: (image: File) => {  
   
@@ -63,7 +61,7 @@ export const profileApi = {
       headers: { 'Content-Type':'multipart/form-data' }}).then( response => response.data )
   },
   profileStatus: (status: string) => {     
-    return instance.put<ResponseType>(`profile/status`,{status} ).then( response => response.data)
+    return instance.put<ResponseType<ProfileType>>(`profile/status`,{status} ).then( response => response.data)
   },
   profileStatusUserId: (userId: number | null) => {      
     return instance.get<string>(`profile/status/` + userId ).then( response => response.data)
