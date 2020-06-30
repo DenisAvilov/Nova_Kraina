@@ -6,6 +6,7 @@ import { InitialStateType } from '../../../redux/profile-reduce';
 import { PhotosType, PostType } from '../../../types/State_Profile_Reduce';
 import { UserProfileFoto } from '../user/User';
 import NewPost from '../newpost/Newpost';
+import PhotoUser from '../../asideLeft/PhotoUser';
 let textarea =  renderField("textarea"), input = renderField("input");
 
 type FormForNewPostType = {
@@ -30,20 +31,20 @@ let FormPost = reduxForm(
     { form: "formNewPost"}
 )(FormForNewPost)
 
-type UserWritesNewPostType = {
-   
-    photos: PhotosType | undefined
-    onSubmit: any
+type UserWritesNewPostType = {   
   
+    onSubmit: any
+    photo: PhotosType | undefined
    }
 
 const UserWritesNewPost: React.FC<UserWritesNewPostType> = (props: UserWritesNewPostType) => { 
-let {photos} = props
+let {photo} = props
     return (
         <div className={d.new_news}>
             <div className={d.your_news}>
                 <div className={d.your_user_logo}>
-               { UserProfileFoto( photos, "small" )}
+               <PhotoUser  photo={photo}/>
+               {/* { UserProfileFoto( photos, "small" )} */}
                 </div>
                 <FormPost onSubmit={props.onSubmit}/>               
             </div>

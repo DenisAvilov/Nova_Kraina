@@ -1,5 +1,6 @@
+import { PhotosType } from './../types/State_Profile_Reduce';
 import { GeneralType } from './../types/State_General_Reduce';
-import {  authApi, ResultCode, ResultCodeFoCaptcha, securityApi } from "../api/Api"
+import {  authApi, ResultCode, ResultCodeFoCaptcha, securityApi, profileApi } from "../api/Api"
 import { stopSubmit } from "redux-form"
 import { interLiteralString } from '../types/LiteralFromString'
 import { RootReducerType } from './store-redux'
@@ -9,15 +10,20 @@ import { ThunkAction } from 'redux-thunk'
 const TO_COME_IN = "NOVA-KRAINA/GENERAL/TO-COME-IN"
 const IS_OPEN = "NOVA-KRAINA/GENERAL/OPEN"
 const SECURITY_CAPTCHA = "NOVA-KRAINA/GENERAL/CAPTCHA"
+const MY_PHOTO_PROFILE = "NOVA-KRAINA/GENERAL/MY_PHOTO_PROFILE"
 
-
-let iniliset: GeneralType = { 
+let iniliset: GeneralType  = { 
   id: null,
   email: null,
   login: null,
   isYou: false,
   isOpen: false,
-  captcha: null 
+  captcha: null,
+  photo: {
+    small: null,
+    large: null 
+  }
+ 
 }
 //Принимает  State and return Type as state : GeneralType
 const general = (state = iniliset, action: ActionType): GeneralType => {
@@ -29,7 +35,7 @@ const general = (state = iniliset, action: ActionType): GeneralType => {
         id: action.id,
         email: action.email,
         login: action.login,
-        isYou: action.isYou        
+        isYou: action.isYou             
       }
     }    
      case IS_OPEN: {
@@ -45,23 +51,37 @@ const general = (state = iniliset, action: ActionType): GeneralType => {
         captcha: action.url
            }
     } 
+    
+    case MY_PHOTO_PROFILE: {  
+          
+      return {
+        ...state ,
+        photo: action.photos      
+           }
+    } 
+
     default:
       return state;
   }
 
 }
-type ActionType = ReturnType<typeof to_came_in>  | ReturnType<typeof is_open> |  ReturnType<typeof captchaOk>
+type ActionType = ReturnType<typeof to_came_in>  | ReturnType<typeof is_open> |  ReturnType<typeof captchaOk> | ReturnType<typeof myPhotoSuccess>
 
  const to_came_in = (email: null | string, id: null | number, login: null | number | string, isYou: boolean) =>
   ({ type: interLiteralString(TO_COME_IN), email, id, login, isYou } as const);
 
   const is_open = () => ({ type: interLiteralString(IS_OPEN) } as const);
 
-
-
   const captchaOk = (url: string | null ) => ({ type: interLiteralString(SECURITY_CAPTCHA), url } as const);
 
+  const myPhotoSuccess = (photos: PhotosType) => ({ type: interLiteralString(MY_PHOTO_PROFILE), photos } as const );  
+
 type GeneralActionCreatorType = ThunkAction<Promise<void>, RootReducerType, unknown, ActionType>
+
+export const getPhotoUser = (uresId: number | null):GeneralActionCreatorType => async (distpach) => {
+  const response = await profileApi.profileUserId(uresId)    
+    distpach(myPhotoSuccess(response.data.photos)) 
+}
 
 export const getUsersData = ():GeneralActionCreatorType => async (distpach) => {
   const response = await authApi.authMe()  

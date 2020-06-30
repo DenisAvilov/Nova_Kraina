@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { BriefType } from '../../../types/State_Profile_Reduce'
 type AboutOverviewTypeProps = {
     brief: BriefType
-
+ 
 }
 type OwnState = {
     value: number | string[] | undefined

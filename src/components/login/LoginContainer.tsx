@@ -41,7 +41,7 @@ class LoginContainer extends React.Component<OllPropsType>{
 }
 
 let mapStateToProps = (state: RootReducerType) : PropsType=> {
-  
+ 
     return{
         isYou: state.general.isYou,
         captcha: state.general.captcha

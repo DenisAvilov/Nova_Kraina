@@ -5,13 +5,15 @@ import { ProfileType, BriefType } from '../../types/State_Profile_Reduce'
 type AboutType = { 
     aboutDetail: ProfileType
     brief: BriefType
-    
-    onSubmit: any
+    isMyPage: boolean | null
+    putProfileData: (values:ProfileType) => void
 }
-export const About: React.FC<AboutType> = ( {aboutDetail, brief, onSubmit}: AboutType) => { 
+export const About: React.FC<AboutType> = ( {aboutDetail, brief,  isMyPage, putProfileData }: AboutType) => { 
+     
+   
   
     return (   <React.Fragment>  
-                  <AboutDetail aboutDetail={aboutDetail} brief={brief}  onSubmit={onSubmit}/>                 
+                  <AboutDetail aboutDetail={aboutDetail} brief={brief}  isMyPage={isMyPage}  putProfileData={putProfileData}/>                 
              </React.Fragment>
             )
 }

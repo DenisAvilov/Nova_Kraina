@@ -7,9 +7,9 @@ import NewPost from './newpost/Newpost';
 
 type ProfilePageType ={      
     post: Array<PostType>,
-    profile: ProfileType, 
+    photoUser: PhotosType | undefined, 
     brief:  BriefType,
-    photos: PhotosType | undefined 
+  
    
     onSubmit: (values: any) => void
     addPost: (writeNewPost: string)=> void     
@@ -17,14 +17,14 @@ type ProfilePageType ={
 
 const ProfilePage:React.FC<ProfilePageType> = (props: ProfilePageType) => {  
 
- let {brief, profile:{photos}, onSubmit, post } = props
+ let {brief, photoUser, onSubmit, post } = props
 
     return (<div className={d.profilePage_wrapper}> 
                 <div className={d.profileUserState_wrap}>
                      <UserState brief={brief} />   
                 </div> 
                 <div className={d.profilePost_wrap}>
-                    <UserWritesNewPost  photos={photos}   onSubmit={onSubmit}  />
+                    <UserWritesNewPost  photo={photoUser}   onSubmit={onSubmit}  />
                     <NewPost post={post} /> 
                 </div>            
            </div> 

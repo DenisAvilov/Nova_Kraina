@@ -25,13 +25,11 @@ type ProfileData = {
   fullName: string
   contacts: {github: string, vk: string, facebook: string, instagram: string, twitter: string, website: string, youtube: string, mainLink: string}
 }
-
 type UserApiResponseType = {
   items: Array<ItemsType> 
   totalCount: number
   error: string
  } 
-
 export const userApi = {
   usersGet: async (countPage?: number | string) => {
   const response = await instance.get<ResponseType<ItemsType>>(`users?page=${countPage}`)  
@@ -96,7 +94,6 @@ type AuthApiResponseAuthLogin = {
   messages: Array<string> 
   data: {userId: number}
 }
-
 export const authApi = {
   authMe : async () => {
     const response = await  instance.get<AuthApiResponseType>('auth/me') 
@@ -110,7 +107,6 @@ export const authApi = {
     return instance.delete<{ resultCode: number, messages: Array<string>, data: {} }>('/auth/login' )
   }    
 }
-
 type Captcha =  { url: string | null }
 export const securityApi = {
   security : async () =>{

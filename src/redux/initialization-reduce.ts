@@ -13,7 +13,7 @@ let initializationSuccess: SuccessType  = {
     
     switch(action.type){        
         case INITIALIZATION_SUCCESS: { 
-       
+
              return{
                ...state,
                success: true 

@@ -1,3 +1,6 @@
+// import { setUser } from './profile-reduce';
+import { createStore } from 'redux';
+import { getOwnUserId } from './selector-redux';
 
 import { ResultCode } from './../api/Api';
 
@@ -126,32 +129,29 @@ export default profile;
 type ProfileActionCreatorType =  ThunkAction<Promise<void>, RootReducerType, unknown, ActionType> 
 
 
-export const putProfileData = ( values: ProfileType ): ProfileActionCreatorType => 
-// sank-action название из документации  \ санка  
-    async ( dispatch ) => {      
-        let response = await profileApi.profile(values)
-        debugger
-        if(response.resultCode === ResultCode.Success){ 
 
-            dispatch(saveProfileData(response.data) )
-        }
+export const putProfileData = ( profile: ProfileType ): ProfileActionCreatorType => 
+// sank-action название из документации  \ санка  
+    async ( dispatch, getOwnUserId ) => {      
+        let response = await profileApi.profile(profile)      
+        const UserId = getOwnUserId().general.id
+        if(response.resultCode === ResultCode.Success){          
+            dispatch(setUsers(UserId))   
+           }
 
         
          
 }
 
 
-export const setUsers = (userId: number | null , generalId: number | null ): ProfileActionCreatorType => 
+export const setUsers = (userId: number | null  ): ProfileActionCreatorType => 
 // sank-action название из документации  \ санка  
-    async (dispatch, getState) => {
+    async (dispatch, getState) => {      
 
-        let userProfileId = userId;         
-        if (!userProfileId) {
-            userProfileId = generalId
-        }
-        let response = await profileApi.profileUserId(userProfileId)
+       
+        let response = await profileApi.profileUserId(userId)
         dispatch(setUser(response.data)) 
-         let data = await profileApi.profileStatusUserId(userProfileId)    
+         let data = await profileApi.profileStatusUserId(userId)    
       
          dispatch(statusSuccess(data))
 }

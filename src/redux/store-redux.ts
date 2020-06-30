@@ -30,6 +30,8 @@ export type RootReducerType = ReturnType<typeof RootReducer>
  const store = createStore(RootReducer, composeEnhancers(  compose(
     applyMiddleware(thunkMiddleware)
   ))) 
+//@ts-ignore
+  window.store = store
   export default store
 
 

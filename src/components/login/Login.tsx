@@ -37,6 +37,7 @@ let LoginForm = reduxForm<LoginFormValuesType, MeProps>({ form: 'loginField' })(
 type LoginType = { isYou: boolean | null, onSubmit: any, captcha: string | null }
 //Login  - это наша компонента 
 const Login: React.FC<LoginType> = ({ isYou, onSubmit, captcha }: LoginType) => {
+  
     if (isYou) return <Redirect to={"/profile"}></Redirect>
     return (<div className={d.wrap}>
         <h1>Авторизируйтесь</h1>
