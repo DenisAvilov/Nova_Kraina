@@ -1,15 +1,9 @@
-// import { setUser } from './profile-reduce';
-import { createStore } from 'redux';
-import { getOwnUserId } from './selector-redux';
-
-import { ResultCode } from './../api/Api';
-
-import {  profileApi } from '../api/Api'
+import { ResultCodeEnum } from '../api/AuthApi'
+import { profileApi } from '../api/ProfileApi'
 import { interLiteralString } from '../types/LiteralFromString'
-import { PostType, BriefType, ProfileType, PhotosType, } from './../types/State_Profile_Reduce'
-import { RootReducerType } from './store-redux'
-import { ThunkAction } from 'redux-thunk'
-import general from './general'
+import { PostType, BriefType, ProfileType, } from './../types/State_Profile_Reduce'
+import { ActionsTypes, BaseActionType } from './store-redux'
+import { stopSubmit } from 'redux-form'
 
 const ADD_POST = 'NOVA-KRAINA/PROFILE-REDUCE/ADD-POST'
 const SET_USERS = 'NOVA-KRAINA/PROFILE-REDUCE/SET-USERS'
@@ -18,10 +12,9 @@ const STATUS_GET = 'NOVA-KRAINA/PROFILE-REDUCE/STATUS-GET'
 const SAVE_FOTO = 'NOVA-KRAINA/PROFILE-REDUCE/SAVE-FOTO'
 const SAVE_PROFILE_DATA = 'NOVA-KRAINA/PROFILE-REDUCE/SAVE-PROFILE-DATA'
 
-
 let initialState = {
     profile: {} as ProfileType,
-    status: "Добавьте информацию",    
+    status: "Добавьте информацию",
     post: [{
         id: 0,
         avatarImg: "https://www.w3schools.com/w3css/img_avatar3.png",
@@ -42,7 +35,7 @@ let initialState = {
     } as BriefType,
     placeholder: 'Что у вас нового?',
 }
-export type InitialStateType = typeof initialState
+
 // возвращаемое значение для function profile будет InitialStateType
 const profile = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
@@ -63,19 +56,19 @@ const profile = (state = initialState, action: ActionType): InitialStateType => 
             }
         }
         case SET_USERS: {
-          
+
             return {
                 ...state,
                 profile: action.profile
             }
         }
         case STATUS_GET: {
-    
+
             return {
                 ...state,
                 status: action.status
             }
-        }    
+        }
         case STATUS_CHANGE: {
             return {
                 ...state,
@@ -83,98 +76,89 @@ const profile = (state = initialState, action: ActionType): InitialStateType => 
             }
         }
         case SAVE_FOTO: {
-        
+
             return {
                 ...state,
-              profile:  {...state.profile, photos : action.foto}
-             }
+                profile: { ...state.profile, photos: action.foto }
+            }
         }
         case SAVE_PROFILE_DATA: {
-           
+
             return {
                 ...state,
-              profile:  action.profile
-             }
+                profile: action.profile
+            }
         }
         default:
             return state;
     }
 }
 
-export const addPost = (newTextPost: string) => ({ type: interLiteralString(ADD_POST), newTextPost } as const);
-export const setUser = (profile: ProfileType) => ({ type: interLiteralString(SET_USERS), profile } as const);
-export const statusСhanged = (status: string) => ({ type: interLiteralString(STATUS_CHANGE), status } as const);
-export const statusSuccess = (status: string) => ({ type: interLiteralString(STATUS_GET), status } as const);
-export const saveFotoSuccess = (foto: any ) => ({ type: interLiteralString(SAVE_FOTO), foto } as const);
-
-export const saveProfileData = (profile: ProfileType ) => ({ type: interLiteralString(SAVE_PROFILE_DATA), profile } as const);
+export const actions = {
+    setUser: (profile: ProfileType) => ({ type: interLiteralString(SET_USERS), profile } as const),
+    statusСhanged: (status: string) => ({ type: interLiteralString(STATUS_CHANGE), status } as const),
+    statusSuccess: (status: string) => ({ type: interLiteralString(STATUS_GET), status } as const),
+    saveFotoSuccess: (foto: any) => ({ type: interLiteralString(SAVE_FOTO), foto } as const),
+    saveProfileData: (profile: ProfileType) => ({ type: interLiteralString(SAVE_PROFILE_DATA), profile } as const),
+    newPost: (newTextPost: string) => ({ type: interLiteralString(ADD_POST), newTextPost } as const)
+}
 
 //Если мы укажем в дженерике что-то не похожее на string — typescript выдаст нам ошибку
 // type onlyString<T> = T extends string ? string : never
-// const d:onlyString<string> = "42";
-//typeof returnтип Type the c creator'a
-//ReturnType return Type function тип экшена
-
-type ActionType = ReturnType<typeof addPost> | ReturnType<typeof setUser> |
-                  ReturnType<typeof statusСhanged> | ReturnType<typeof statusSuccess> | ReturnType<typeof saveFotoSuccess> | 
-                   ReturnType<typeof saveProfileData>  
 
 export default profile;
 
-//Типизация дистпачей :> рефакторинг 
-// type DistpashType = Dispatch<ActionType>
-// type GetStateType = () => RootReducerType
-//sanka название из документаци \ сан-криейтор 
-
-type ProfileActionCreatorType =  ThunkAction<Promise<void>, RootReducerType, unknown, ActionType> 
-
-
-
-export const putProfileData = ( profile: ProfileType ): ProfileActionCreatorType => 
-// sank-action название из документации  \ санка  
-    async ( dispatch, getOwnUserId ) => {      
-        let response = await profileApi.profile(profile)      
+export const putProfileData = (profile: ProfileType): ThunkType =>
+    // sank-action название из документации  \ санка  
+    //I don't know how i mast typing this distpath 
+    async (dispatch, getOwnUserId) => {
+        let response = await profileApi.profile(profile)
         const UserId = getOwnUserId().general.id
-        if(response.resultCode === ResultCode.Success){          
-            dispatch(setUsers(UserId))   
-           }
+        if (response.resultCode === ResultCodeEnum.Success) {
+            dispatch(setUsers(UserId))
+        }
+        else {
+            dispatch(stopSubmit("UserAboutWork", { _error: response.messages }))
+        }
+        stopSubmit("UserAboutWork", { _error: response.messages })
+    }
 
-        
-         
-}
-
-
-export const setUsers = (userId: number | null  ): ProfileActionCreatorType => 
-// sank-action название из документации  \ санка  
-    async (dispatch, getState) => {      
-
-       
+export const setUsers = (userId: number | null): ThunkType =>
+    // sank-action название из документации  \ санка  
+    async (dispatch, getState) => {
         let response = await profileApi.profileUserId(userId)
-        dispatch(setUser(response.data)) 
-         let data = await profileApi.profileStatusUserId(userId)    
-      
-         dispatch(statusSuccess(data))
-}
+        dispatch(actions.setUser(response.data))
+        let data = await profileApi.profileStatusUserId(userId)
+        dispatch(actions.statusSuccess(data))
+    }
 
-export const statusСhangedSuccess = (status: string): ProfileActionCreatorType =>   
+export const statusСhangedSuccess = (status: string): ThunkType =>
     async (dispatch, getState) => {
         let data = await profileApi.profileStatus(status)
-        if(data.resultCode === ResultCode.Success){
-            dispatch(statusСhanged(status))
-        }if(data.resultCode === ResultCode.Error){
-            dispatch(statusСhanged(data.messages[0]))
+        if (data.resultCode === ResultCodeEnum.Success) {
+            dispatch(actions.statusСhanged(status))
+        } if (data.resultCode === ResultCodeEnum.Error) {
+            dispatch(actions.statusСhanged(data.messages[0]))
         }
-}
-export const saveFoto =  ( file: File): ProfileActionCreatorType =>  async (dispatch) => { 
-    
-        
-      let data =  await profileApi.profilePhoto(file)
-       if(data.resultCode = ResultCode.Success){
-        dispatch(saveFotoSuccess(data.data.large ))  
-       }
-         
+    }
+export const saveFoto = (file: File): ThunkType => async (dispatch) => {
+    let data = await profileApi.profilePhoto(file)
+    if (data.resultCode = ResultCodeEnum.Success) {
+        dispatch(actions.saveFotoSuccess(data.data.large))
+    }
 }
 
+export const addPost = (writeNewPost: string): ThunkType => async (dispatch) => {
+    dispatch(actions.newPost(writeNewPost))
+}
 
 
+export type InitialStateType = typeof initialState
+export type ActionType = ActionsTypes<typeof actions>
+//Передаем в наш тип дополнительный тип: stopSubmit 
+type ThunkType = BaseActionType<ActionType | ReturnType<typeof stopSubmit>>
+
+
+// type DistpashType = Dispatch<ActionType>
+// type GetStateType = () => RootReducerType
 // export const exemple = (parametrs) => (dispatch) => { API }

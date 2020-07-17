@@ -7,12 +7,8 @@ export const getPost =  createSelector( UserProfile, (profile) => { return profi
 export const getBrief = createSelector(UserProfile, (profile) => { return profile.briefInformation} )
 export const getPlaceholder = createSelector(UserProfile, (profile) => { return profile.placeholder} )
 export const getProfile = createSelector(UserProfile, (profile) => { return profile.profile} )
-
 export const getStatus = createSelector(UserProfile, (profile) => {return profile.status })
-
 export const getFriends = createSelector(UserFriends, (friends) => {return friends.users} )
-
-
 
 
  const General = (state: RootReducerType) => { return state.general }

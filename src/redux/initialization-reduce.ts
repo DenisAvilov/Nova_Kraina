@@ -1,19 +1,20 @@
 
-import { getUsersData } from "./general";
-import { interLiteralString } from "../types/LiteralFromString";
-const INITIALIZATION_SUCCESS = "NOVA-KRAINA/INITIALIZATION-SUCCESS";
-type SuccessType = {
-    success: boolean
-}
-let initializationSuccess: SuccessType  = {
+import { getUsersData } from './general'
+import { interLiteralString } from '../types/LiteralFromString'
+import { ActionsTypes } from './store-redux'
+const INITIALIZATION_SUCCESS = 'NOVA-KRAINA/INITIALIZATION-SUCCESS'
+
+let initialSuccess = {
     success: false
   }
- const initialization = ( state = initializationSuccess, action: ActionType ) : SuccessType => {  
 
-    
+const actions = {
+  is_initializationSuccess : () => ({ type:  interLiteralString(INITIALIZATION_SUCCESS) } as const)
+}
+
+ const initialization = ( state = initialSuccess, action: ActionType ): SuccessType => {     
     switch(action.type){        
         case INITIALIZATION_SUCCESS: { 
-
              return{
                ...state,
                success: true 
@@ -24,22 +25,15 @@ let initializationSuccess: SuccessType  = {
     }
 }
 
-type ActionType = ReturnType<typeof is_initializationSuccess> 
-
-const is_initializationSuccess = ()=>({ type:  interLiteralString(INITIALIZATION_SUCCESS) } as const);
-
 export default initialization;
 
-
-export const is_initialization = () => (distpach: any) => { 
- 
+export const is_initialization = () => (distpach:any) => {  
     let promise = distpach( getUsersData() )
     Promise.all([promise]).then(
-     () => distpach( is_initializationSuccess() )
-    )  
-
-   
-  
+     () => distpach( actions.is_initializationSuccess() )
+    )    
 }
 
 
+type SuccessType = typeof initialSuccess
+type ActionType = ActionsTypes<typeof actions>
