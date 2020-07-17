@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, withRouter, BrowserRouter, Switch} from "react-router-dom"
+import { BrowserRouter as Router, Route, withRouter, BrowserRouter, Switch } from "react-router-dom"
 import './App.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -15,58 +15,56 @@ import LoginContainer from './components/login/LoginContainer'
 import { connect, Provider } from 'react-redux'
 import { compose } from 'redux'
 import { is_initialization } from './redux/initialization-reduce'
-import { emailUser } from './redux/selector-redux'
+
 
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
-     faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
+    faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
+class App extends React.Component<MyProps & MyDistpachToProps, MyState>{
 
-type MyToProps = ReturnType<typeof mapStateToProps> 
-type MyState = {  }
-type MyDistpachToProps = {
-     is_initialization: ()=> void
-    }
-type  MyProps = MyToProps 
+    componentDidMount() { this.props.is_initialization() }
 
-class App extends React.Component<MyProps & MyDistpachToProps, MyState>{ 
+    render() {
 
-     componentDidMount(){ this.props.is_initialization() }
- 
-     render(){
-         
-     let{initializationSeccess} = this.props
+        let { initializationSeccess } = this.props
 
-  if(!initializationSeccess) return <>LOADING</>
-    return (<div className="grid" >
+        if (!initializationSeccess) return <>LOADING</>
+        return (<div className="grid" >
             <HeaderContainer />
             <AsideLeftContainer />
-            <AsideRight />     
-            <Switch>         
-              <Route exact path="/"  render={() =>  <Main  /> } />  
-              <Route path="/profile/:userId?" render={() => <ProfileConteiner  />} />          
-              <Route path="/login" render={() => < LoginContainer />} />
-              <Route path="/friends" render={() => < FriendsContainer />} />                    
-              </Switch>
-           </div>
-        ); } }   
-
-const mapStateToProps = (store:RootReducerType) => {
-     return{
-        initializationSeccess: store.initialization.success,
- 
-     }
- }    
-
-const ContainerApp = compose<React.ComponentType>(  
-    withRouter,    
-    connect(mapStateToProps , { is_initialization })
-)(App); 
-
-const NovaKraina:React.FC  = () => {
-return <BrowserRouter> <Provider store={store}> <ContainerApp/> </Provider>  </BrowserRouter>
+            <AsideRight />
+            <Switch>
+                <Route exact path="/" render={() => <Main />} />
+                <Route path="/profile/:userId?" render={() => <ProfileConteiner />} />
+                <Route path="/login" render={() => < LoginContainer />} />
+                <Route path="/friends" render={() => < FriendsContainer />} />
+            </Switch>
+        </div>
+        );
+    }
 }
-export default NovaKraina
 
+const mapStateToProps = (store: RootReducerType) => {
+    return {
+        initializationSeccess: store.initialization.success,
+
+    }
+}
 
 //error JSX element type 'ContainerApp' does not have any construct or call signatures; тоесть компонент 'ContainerApp' не является компонентам. 
 // указываем в 'compose' что возвращай компонты с типом по умолчанию 'React.ComponentType'
+const ContainerApp = compose<React.ComponentType>(
+    withRouter,
+    connect(mapStateToProps, { is_initialization })
+)(App);
+
+const NovaKraina: React.FC = () => {
+    return <BrowserRouter> <Provider store={store}> <ContainerApp /> </Provider>  </BrowserRouter>
+}
+export default NovaKraina
+
+type MyProps = ReturnType<typeof mapStateToProps>
+type MyState = {}
+type MyDistpachToProps = {
+    is_initialization: () => void
+}
