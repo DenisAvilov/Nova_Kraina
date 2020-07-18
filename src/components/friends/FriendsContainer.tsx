@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { getUsersThunkCreator, friendFollow, friendUnFollow, ItemsType, viewCountPage, pagination } from "../../redux/friends-reduce";
+
 import Friends from "./Friends";
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import { compose } from 'redux';
 import { RootReducerType } from '../../redux/store-redux';
 import { emailUser, getFriends } from '../../redux/selector-redux';
+
 
 
 type mapStateToPropsType = {
@@ -65,7 +67,7 @@ let mapStateToProps = (store: RootReducerType) : mapStateToPropsType => {
     }
 }
 //Перейти  в types connect и посмотреть что передавать TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect<stateToProps, mapDispathToPropsType,  mapStateToPropsType, RootReducerType>(
         mapStateToProps, { getUsersThunkCreator,  friendFollow, friendUnFollow, viewCountPage, pagination }))(FriendsContainer)

@@ -123,7 +123,7 @@ export const putProfileData = (profile: ProfileType): ThunkType =>
         stopSubmit("UserAboutWork", { _error: response.messages })
     }
 
-export const setUsers = (userId: number | null): ThunkType =>
+export const setUsers = (userId: number | null | string): ThunkType =>
     // sank-action название из документации  \ санка  
     async (dispatch, getState) => {
         let response = await profileApi.profileUserId(userId)

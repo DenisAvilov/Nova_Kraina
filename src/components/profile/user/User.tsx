@@ -21,7 +21,7 @@ const User: React.SFC<IProps> = (props: IProps) => {
    let addFile = (e: React.ChangeEvent<HTMLInputElement>) : void => {    
          if(e.target.files?.length )
            
-           { saveFoto(e.target.files[0] ) }
+           { saveFoto(e.target.files[0] ) } 
     }
     return (
         <div className={d.header}>   

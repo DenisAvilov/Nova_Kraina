@@ -4,6 +4,7 @@ import UserWritesNewPost from './userWritesNewPost/UserWritesNewPost';
 import UserState from './userState/UserState';
 import { BriefType, PostType,  ProfileType, PhotosType } from '../../types/State_Profile_Reduce';
 import NewPost from './newpost/Newpost';
+import { WriteNewPostType } from './ProfileContainer';
 
 type ProfilePageType ={      
     post: Array<PostType>,
@@ -11,7 +12,7 @@ type ProfilePageType ={
     brief:  BriefType,
   
    
-    onSubmit: (values: any) => void
+    onSubmit: () => void
     addPost: (writeNewPost: string)=> void     
 }
 

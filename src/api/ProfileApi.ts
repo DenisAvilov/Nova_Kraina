@@ -34,10 +34,10 @@ export const profileApi = {
     profileStatus: (status: string) => {     
       return instance.put<ResponseType<ProfileType>>(`profile/status`,{status} ).then( response => response.data)
     },
-    profileStatusUserId: (userId: number | null) => {      
+    profileStatusUserId: (userId: number | null | string) => {      
       return instance.get<string>(`profile/status/` + userId ).then( response => response.data)
       }, 
-    profileUserId: (userId: number | null) => {  
+    profileUserId: (userId: number | null | string) => {  
       return instance.get<ProfileResponseUserId>(`profile/` + userId)
     },
   }

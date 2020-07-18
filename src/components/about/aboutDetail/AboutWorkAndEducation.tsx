@@ -6,6 +6,7 @@ import { ProfileType, ContactsType } from '../../../types/State_Profile_Reduce'
 import { AboutWorkFormUser } from './AboutWorkForm'
 import { render } from '@testing-library/react'
 import { ProfileData } from './ProfileData'
+import { Link, Redirect } from 'react-router-dom'
 
 export type AboutWorkAndEducationType ={
     aboutDetail: ProfileType
@@ -18,7 +19,7 @@ export const AboutWorkAndEducation: React.FC<AboutWorkAndEducationType> = ({ isM
 
         let [changeMode , SetChangeMode] = React.useState(false) 
 
-       const  onSubmit = (values:ProfileType) => {
+       const  onSubmit = (values:ProfileType ) => {
             putProfileData(values)
             SetChangeMode(false)
         }
@@ -27,7 +28,7 @@ export const AboutWorkAndEducation: React.FC<AboutWorkAndEducationType> = ({ isM
      <h1 className={about.h2}>Работа </h1> 
      
        {changeMode 
-        ? <AboutWorkFormUser  initialValues={aboutDetail}    onSubmit={onSubmit} /> 
+        ? <AboutWorkFormUser  initialValues={aboutDetail}  aboutDetail={aboutDetail}  onSubmit={onSubmit} /> 
         : <ProfileData changeMode={() => SetChangeMode(true)}  aboutDetail={aboutDetail}  isMyPage={isMyPage} /> 
         }
  
@@ -35,10 +36,10 @@ export const AboutWorkAndEducation: React.FC<AboutWorkAndEducationType> = ({ isM
  
  type ContactType = {
     contactKey: string
-    contactValue: string | null
+    contactValue: string 
  }
  export const Contact: React.FC<ContactType> = ( {contactKey, contactValue}:ContactType ) => {
-
-        return <div>  {contactKey} ' ' {contactValue} </div>
+     
+        return <div>  <b> {contactKey} </b> <a href={contactValue} > {contactValue} </a> </div>
      
  }

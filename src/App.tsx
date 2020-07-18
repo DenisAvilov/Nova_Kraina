@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Route, withRouter, BrowserRouter, Switch } from "react-router-dom"
 import './App.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -6,8 +6,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses, faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import AsideRight from './components/asideRight/AsideRight'
 import Main from './components/main/Main'
-import ProfileConteiner from './components/profile/ProfileContainer'
-import FriendsContainer from './components/friends/FriendsContainer'
+// import ProfileConteiner from './components/profile/ProfileContainer'
+// import FriendsContainer from './components/friends/FriendsContainer'
 import HeaderContainer from './components/header/HeaderContainer'
 import AsideLeftContainer from './components/asideLeft/AsideLeftContainer'
 import store, { RootReducerType } from './redux/store-redux'
@@ -16,7 +16,8 @@ import { connect, Provider } from 'react-redux'
 import { compose } from 'redux'
 import { is_initialization } from './redux/initialization-reduce'
 
-
+const ProfileConteiner = React.lazy(() => import('./components/profile/ProfileContainer'));
+const FriendsContainer = React.lazy(() => import('./components/friends/FriendsContainer'));
 library.add(fab, faCheckSquare, faCoffee, faUsers, faUserFriends, faDiagnoses,
     faFileVideo, faMusic, faCamera, faGraduationCap, faHome, faMapMarker, faThumbsUp)
 
@@ -28,16 +29,18 @@ class App extends React.Component<MyProps & MyDistpachToProps, MyState>{
 
         let { initializationSeccess } = this.props
 
-        if (!initializationSeccess) return <>LOADING</>
+        if (!initializationSeccess) return <>Завантаження...</>
         return (<div className="grid" >
             <HeaderContainer />
             <AsideLeftContainer />
             <AsideRight />
             <Switch>
+            <Suspense fallback={<div>Завантаження...</div>}>
                 <Route exact path="/" render={() => <Main />} />
                 <Route path="/profile/:userId?" render={() => <ProfileConteiner />} />
                 <Route path="/login" render={() => < LoginContainer />} />
                 <Route path="/friends" render={() => < FriendsContainer />} />
+            </Suspense>
             </Switch>
         </div>
         );
@@ -58,10 +61,10 @@ const ContainerApp = compose<React.ComponentType>(
     connect(mapStateToProps, { is_initialization })
 )(App);
 
-const NovaKraina: React.FC = () => {
+export const NovaKraina:React.FC = () => {
     return <BrowserRouter> <Provider store={store}> <ContainerApp /> </Provider>  </BrowserRouter>
 }
-export default NovaKraina
+
 
 type MyProps = ReturnType<typeof mapStateToProps>
 type MyState = {}

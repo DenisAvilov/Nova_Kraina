@@ -1,20 +1,13 @@
-import * as React from 'react';
-import d from './UserWritesNewPost.module.css';
-import { renderField } from '../../renderField/renderField';
-import { reduxForm, Field } from 'redux-form';
-import { InitialStateType } from '../../../redux/profile-reduce';
-import { PhotosType, PostType } from '../../../types/State_Profile_Reduce';
-import { UserProfileFoto } from '../user/User';
-import NewPost from '../newpost/Newpost';
-import PhotoUser from '../../asideLeft/PhotoUser';
-let textarea =  renderField("textarea"), input = renderField("input");
+import * as React from 'react'
+import d from './UserWritesNewPost.module.css'
+import { renderField } from '../../common/renderField'
+import { reduxForm, Field, InjectedFormProps } from 'redux-form'
+import { PhotosType } from '../../../types/State_Profile_Reduce'
+import PhotoUser from '../../asideLeft/PhotoUser'
+import { WriteNewPostType } from '../ProfileContainer'
+let textarea =  renderField("textarea"), input = renderField("input")
 
-type FormForNewPostType = {
-    handleSubmit: any   
-    
-}
-
-const FormForNewPost: React.FC<FormForNewPostType> = (props: FormForNewPostType) => {
+const FormForNewPost: React.FC<InjectedFormProps<WriteNewPostType, UserWritesNewPostType> & UserWritesNewPostType> = (props) => {
 
     const { handleSubmit } = props; 
 
@@ -27,26 +20,16 @@ const FormForNewPost: React.FC<FormForNewPostType> = (props: FormForNewPostType)
 
 }
  
-let FormPost = reduxForm(
-    { form: "formNewPost"}
-)(FormForNewPost)
+let FormPost = reduxForm<WriteNewPostType, any>(  { form: "formNewPost"} )(FormForNewPost)
 
-type UserWritesNewPostType = {   
-  
-    onSubmit: any
-    photo: PhotosType | undefined
-   }
-
-const UserWritesNewPost: React.FC<UserWritesNewPostType> = (props: UserWritesNewPostType) => { 
+const UserWritesNewPost: React.FC<UserWritesNewPostType> = (props) => { 
 let {photo} = props
     return (
         <div className={d.new_news}>
             <div className={d.your_news}>
-                <div className={d.your_user_logo}>
-               <PhotoUser  photo={photo}/>
-               {/* { UserProfileFoto( photos, "small" )} */}
-                </div>
-                <FormPost onSubmit={props.onSubmit}/>               
+                <div className={d.your_user_logo}> 
+                 <PhotoUser  photo={photo}/>  </div>             
+                 <FormPost onSubmit={props.onSubmit}/>               
             </div>
            
         </div>
@@ -54,3 +37,10 @@ let {photo} = props
 }
 
 export default UserWritesNewPost;
+
+
+
+
+type UserWritesNewPostType = {  
+    onSubmit: any
+    photo: PhotosType | undefined    }

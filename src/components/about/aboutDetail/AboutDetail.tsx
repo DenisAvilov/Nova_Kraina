@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ad from './../About.module.css'
 import { Route,  Link,  useRouteMatch, Switch } from 'react-router-dom';
 import { ProfileType, BriefType } from '../../../types/State_Profile_Reduce';
-import { AboutOverview } from './AboutOverview';
+import { AboutOverview } from './aboutOverview/AboutOverview';
 import { AboutWorkAndEducation } from './AboutWorkAndEducation';
 import { Buttons } from './buttons/Buttons';
 type AboutDetailType = {

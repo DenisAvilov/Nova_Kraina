@@ -7,26 +7,13 @@ import { getBrief } from '../../redux/selector-redux'
 import { putProfileData } from '../../redux/profile-reduce'
 
 
-type OwnStateProps = { 
-    isMyPage: boolean | null
+type OwnStateProps = { isMyPage: boolean | null }
+type MapPropsType = {  aboutDetail: ProfileType,  brief: BriefType }
+type DispathPropsType = { putProfileData: (values: ProfileType) => void }
+type PropsType =  MapPropsType & DispathPropsType & OwnStateProps
 
- }
 
-type PropsType = {
-    aboutDetail: ProfileType
-    brief: BriefType
-   
-    
-}
-type DispathPropsType = {
-    putProfileData: (values: ProfileType) => void
-  
-   
-}
-type AboutType =  PropsType & DispathPropsType & OwnStateProps
-class AboutContainer extends React.Component<AboutType, OwnStateProps>{
- 
- 
+class AboutContainer extends React.Component<PropsType, OwnStateProps>{
 
     render() {    
          
@@ -38,12 +25,11 @@ class AboutContainer extends React.Component<AboutType, OwnStateProps>{
     }  
 }
 
-let mapStateToProps = (state: RootReducerType): PropsType  => {
+let mapStateToProps = (state: RootReducerType):  MapPropsType => {
    
     return {        
         aboutDetail: state.profile.profile,
-        brief: getBrief(state)
-       
+        brief: getBrief(state)       
     }
 }
 

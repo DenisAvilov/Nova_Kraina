@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { AboutDetail } from  './aboutDetail/AboutDetail'
+import {  AboutDetail } from  './aboutDetail/AboutDetail'
 import { ProfileType, BriefType } from '../../types/State_Profile_Reduce'
 
 type AboutType = { 

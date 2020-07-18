@@ -6,15 +6,17 @@ import ProfileUserNavigation from '../ProfileUserNavigation/ProfileUserNavigatio
 import { Route, Switch, useRouteMatch, useParams } from 'react-router-dom';
 import ProfilePage from './ProfilePage';
 import AboutContainer from '../about/AboutContainer';
+import { WriteNewPostType } from './ProfileContainer';
+
 type PropsType ={      
     post: Array<PostType>, profile: ProfileType, brief:  BriefType,
     placeholder: string,  isMyPage: boolean | null, status: string 
-    userProfileId: number | null, emailUser: string | null, photoUser: PhotosType    
+    emailUser: string | null, photoUser: PhotosType    
 }
 type ProfileDistpactPropsType = {
     saveFoto: (file: File) => void
     statusСhangedSuccess: (status: string) => void    
-    onSubmit: (values: any) => void
+    onSubmit: any
     addPost: (writeNewPost: string)=> void   
 }
 // export const routes = [
@@ -37,7 +39,9 @@ type ProfileDistpactPropsType = {
 //   ];
 
 const Profile:React.FC<PropsType & ProfileDistpactPropsType> = (props: PropsType & ProfileDistpactPropsType) => { 
- let {emailUser ,isMyPage, status, statusСhangedSuccess, photoUser, saveFoto, profile, addPost, brief, profile:{photos}, onSubmit, post, userProfileId} = props
+ let {emailUser ,isMyPage, status, statusСhangedSuccess, photoUser, saveFoto,
+   profile, addPost, brief, profile:{photos}, onSubmit, post} = props
+
  let {path} = useRouteMatch();
 
     return (<div className={d.wrap}>

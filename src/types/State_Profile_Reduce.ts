@@ -1,5 +1,6 @@
+import { ResultCodeEnum } from './../api/AuthApi';
 import  React  from 'react';
-import { ResultCode } from '../api/Api';
+import { FormErrors } from 'redux-form';
 
 
 export type ContactsType = {
@@ -42,9 +43,10 @@ export type ProfileType = {
     contacts:  ContactsType,
     photos: PhotosType | undefined 
     aboutMe: string
+    // form: string, errors?: FormErrors<any, any> | undefined
 }
 
-export type ResponseType< d = {}, RC = ResultCode > = {
+export type ResponseType< d = {}, RC = ResultCodeEnum > = {
     resultCode: RC
     messages: Array<string>
     data: d

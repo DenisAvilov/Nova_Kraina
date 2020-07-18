@@ -2,9 +2,9 @@ import React from 'react';
 import d from './Login.module.css';
 import { Redirect } from 'react-router-dom';
 import { reduxForm, InjectedFormProps } from 'redux-form';
-import { required, email, minValue5 } from '../renderField/validationForm';
-import { renderField } from '../renderField/renderField';
-import { сreateNewForm } from '../renderField/CreateNewForm';
+import { required, email, minValue5 } from '../common/validationForm';
+import { renderField } from '../common/renderField';
+import { сreateNewForm } from '../common/CreateNewForm';
 import { LoginFormValuesType } from './LoginContainer';
 const input = renderField("Input");
 // InjectedFormProps - импорт формы из редакса 

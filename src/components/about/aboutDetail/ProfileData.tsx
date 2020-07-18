@@ -35,11 +35,11 @@ export const ProfileData: React.FC<ProfileDataType> = ({changeMode , isMyPage,  
      <div> <FontAwesomeIcon icon='home' /> </div>
      <div className={d.state_inform}><span>Контакты: </span>     
              
-     {/* { (Object.keys(aboutDetail.contacts) as Array<keyof typeof aboutDetail.contacts>) .map((key) => 
+     { (Object.keys(aboutDetail.contacts) as Array<keyof typeof aboutDetail.contacts>) .map((key) => 
 
         { return <Contact key={key} contactKey={key} contactValue={aboutDetail.contacts[key]}/> }
          
-         ) }   */}
+         ) }   
      
          </div>
  </li>         
