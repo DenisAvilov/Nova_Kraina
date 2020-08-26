@@ -1,7 +1,7 @@
 
 import axios, { AxiosResponse } from "axios"
 import { ItemsType } from "../redux/friends-reduce"
-import { ProfileType, PhotosType, ContactsType, ResponseType } from "../types/State_Profile_Reduce"
+import { ProfileType, PhotosType, ContactsType, ResponseType, ResponseFriendType } from "../types/State_Profile_Reduce"
 export const instance = axios.create({
   //Проверка куки
   withCredentials: true,
@@ -15,7 +15,12 @@ export const userApi = {
   usersGet: async (countPage?: number | string) => {
   const response = await instance.get<ResponseType<ItemsType>>(`users?page=${countPage}`)  
   return (response.data)      
-  }
+  },
+  getFriend: async ( friend: boolean ) => {
+  
+    const response = await instance.get<ResponseFriendType>(`users?friend=${friend}`)  
+    return (response.data)      
+    }
 }
 
 //типизир res указываем  в AxiosResponse  что ожидаем получить от дата например число

@@ -1,6 +1,7 @@
 import { ResultCodeEnum } from './../api/AuthApi';
 import  React  from 'react';
 import { FormErrors } from 'redux-form';
+import { ItemsType } from '../redux/friends-reduce';
 
 
 export type ContactsType = {
@@ -52,5 +53,9 @@ export type ResponseType< d = {}, RC = ResultCodeEnum > = {
     data: d
   }
 
-
+  export type ResponseFriendType< d = Array<ItemsType> > = {
+    error: string
+    totalCount: number
+    items: d
+  }
 

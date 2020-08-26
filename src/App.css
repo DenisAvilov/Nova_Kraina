@@ -97,16 +97,5 @@ a{
 .header{
     background-color: #18191a;
 }
-.grid{
-    display: grid;
-    min-height: 100vh;
-    grid-template-columns: 300px 1fr 300px;
-    grid-template-rows: 50px 1fr;
-    grid-template-areas:  
-                        "h h h"
-                        "al m ar"
-                        
-    ;
 
-}
 

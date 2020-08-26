@@ -1,9 +1,11 @@
 import { ResultCodeEnum } from '../api/AuthApi'
 import { profileApi } from '../api/ProfileApi'
 import { interLiteralString } from '../types/LiteralFromString'
-import { PostType, BriefType, ProfileType, } from './../types/State_Profile_Reduce'
+import { PostType, BriefType, ProfileType, ResponseFriendType } from './../types/State_Profile_Reduce'
 import { ActionsTypes, BaseActionType } from './store-redux'
 import { stopSubmit } from 'redux-form'
+import { ItemsType } from './friends-reduce'
+
 
 const ADD_POST = 'NOVA-KRAINA/PROFILE-REDUCE/ADD-POST'
 const SET_USERS = 'NOVA-KRAINA/PROFILE-REDUCE/SET-USERS'
@@ -34,6 +36,7 @@ let initialState = {
         misto: 'Kharkov'
     } as BriefType,
     placeholder: 'Что у вас нового?',
+    friend: {} as ResponseFriendType<ItemsType>
 }
 
 // возвращаемое значение для function profile будет InitialStateType
@@ -89,6 +92,7 @@ const profile = (state = initialState, action: ActionType): InitialStateType => 
                 profile: action.profile
             }
         }
+       
         default:
             return state;
     }
@@ -100,13 +104,15 @@ export const actions = {
     statusSuccess: (status: string) => ({ type: interLiteralString(STATUS_GET), status } as const),
     saveFotoSuccess: (foto: any) => ({ type: interLiteralString(SAVE_FOTO), foto } as const),
     saveProfileData: (profile: ProfileType) => ({ type: interLiteralString(SAVE_PROFILE_DATA), profile } as const),
-    newPost: (newTextPost: string) => ({ type: interLiteralString(ADD_POST), newTextPost } as const)
+    newPost: (newTextPost: string) => ({ type: interLiteralString(ADD_POST), newTextPost } as const) 
 }
 
 //Если мы укажем в дженерике что-то не похожее на string — typescript выдаст нам ошибку
 // type onlyString<T> = T extends string ? string : never
 
 export default profile;
+
+
 
 export const putProfileData = (profile: ProfileType): ThunkType =>
     // sank-action название из документации  \ санка  

@@ -1,0 +1,16 @@
+.wrapGrid{
+ display: grid;
+ grid-gap: 30px;
+ grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    .friendWrapFlex{
+        display: flex;
+        align-items: center;
+        flex-grow: 2;
+        padding: 10px 10px;
+        border: 1px solid #202122;
+        margin: 10px;
+        border-radius: 10px;
+        background: linear-gradient(145deg, #202122, #272829);  
+       
+       }
+}

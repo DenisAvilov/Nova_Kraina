@@ -5,6 +5,7 @@ import { interLiteralString } from '../types/LiteralFromString'
 import { trackUsers } from '../untils/object-helpers'
 import { ResultCodeEnum } from '../api/AuthApi'
 import { ActionsTypes, BaseActionType } from './store-redux'
+import { ResponseFriendType } from '../types/State_Profile_Reduce'
 
 
 const ADD_FRIEND = "NOVA-KRAINA/FRIENDS-REDUCE/ADD-FRIEND"
@@ -12,7 +13,7 @@ const DEL_FRIEND = "NOVA-KRAINA/FRIENDS-REDUCE/DEL-FRIEND"
 const SET_USERS_FRIENDS = "NOVA-KRAINA/FRIENDS-REDUCE/SET-USERS-FRIENDS"
 const TRACKING_BUTTON = "NOVA-KRAINA/FRIENDS-REDUCE/TRACKING-BUTTON"
 const PAGINATION_CHANGE = "NOVA-KRAINA/FRIENDS-REDUCE/PAGINATION-CHANGE"
-
+const FRIEND_DATA = 'NOVA-KRAINA/PROFILE-REDUCE/FRIEND_DATA'
 
 
 let iniliset = {
@@ -22,6 +23,8 @@ let iniliset = {
   page: 1,
   term: '',
   totalCount: 0,
+  friend:  [] as Array<ItemsType>,
+  totalCountFriend: 0
 }
 
 const friends = (state = iniliset, action: ActionType): InilisetType => {
@@ -33,9 +36,11 @@ const friends = (state = iniliset, action: ActionType): InilisetType => {
       }
     }
     case DEL_FRIEND: {
+      
       return {
         ...state,
-        users: trackUsers(state.users, "id", action.userId, { followed: false })
+        users: trackUsers(state.users, "id", action.userId, { followed: false }),
+        friend: trackUsers(state.friend, "id", action.userId, { followed: false })
       }
     }
     case SET_USERS_FRIENDS: {
@@ -58,20 +63,35 @@ const friends = (state = iniliset, action: ActionType): InilisetType => {
           : state.usersTracking.filter(id => id != action.usersId)
       }
     }
+    case FRIEND_DATA: {
+      return {
+          ...state,
+          friend: action.friend.items,
+          totalCountFriend: action.friend.totalCount
+      }
+  }
     default:
       return state;
   }
 }
-
+  
 export const actions = {
   add_Friend: (userId: number) => ({ type: interLiteralString(ADD_FRIEND), userId } as const),
   del_Friend: (userId: number) => ({ type: interLiteralString(DEL_FRIEND), userId } as const),
   setUsersFriends: (data: any) => ({ type: interLiteralString(SET_USERS_FRIENDS), data } as const),
   setPagination: (page: number) => ({ type: interLiteralString(PAGINATION_CHANGE), page } as const),
-  stateTrackingButton: (usersId: number, followed: boolean) => ({ type: interLiteralString(TRACKING_BUTTON), usersId, followed } as const)
+  stateTrackingButton: (usersId: number, followed: boolean) => ({ type: interLiteralString(TRACKING_BUTTON), usersId, followed } as const),
+  friendSuccess: (friend: ResponseFriendType) => ({ type: interLiteralString(FRIEND_DATA), friend } as const)
 }
 
 export default friends;
+
+export const setFriendData = (friend: boolean): FriendsAction => async (dispatch) => {
+
+  let data = await userApi.getFriend(friend)
+     dispatch(actions.friendSuccess(data))
+   
+ }
 
 export const pagination = (page: number): FriendsAction => {
   return async (dispatch) => {
@@ -121,7 +141,7 @@ export type ItemsType = {
   name: string | null
   photos: PhotosType
   status: string | null
-  uniqueUrlName: null
+  
 }
 
 

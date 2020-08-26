@@ -1,33 +1,39 @@
 import * as React from 'react'
 import Profile from './Profile'
-import { addPost,  setUsers, statusСhangedSuccess, saveFoto } from '../../redux/profile-reduce'
+import { addPost,  setUsers, statusСhangedSuccess, saveFoto} from '../../redux/profile-reduce'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
 import { compose } from 'redux'
 import { RootReducerType } from '../../redux/store-redux'
 import { BriefType, PostType, ProfileType, PhotosType } from '../../types/State_Profile_Reduce'
-import { getPost, getBrief, getPlaceholder, getProfile, getOwnUserId, emailUser, } from '../../redux/selector-redux'
+import { getPost, getBrief, getPlaceholder, getProfile, getOwnUserId, emailUser, getTotalCountFriend } from '../../redux/selector-redux'
 
 
 class ProfileConteiner extends React.Component<PropsType> {
     isMyPage!: boolean | null;
     
+    
     drawComponent() {
 
-        let { setUsers, match, generalId } = this.props
-        let userProfileId: number | null | string = null;        
-            
+        let { setUsers, match, generalId} = this.props
+        let userProfileId: number | null | string = null;    
+      
+      
+        
         if (isFinite(match.params.userId as unknown as number) ) {
             userProfileId = match.params.userId
         } else {
             userProfileId = generalId
         }
         setUsers(userProfileId)
+       
     }
 
     componentDidMount() {
         this.drawComponent()
+       
+       
     }
 
     componentDidUpdate(prevProps: RouteComponentProps<MapParamsTypes> ) {
@@ -58,7 +64,7 @@ class ProfileConteiner extends React.Component<PropsType> {
         />
     }
 }
-let mapStateToProps = (state: RootReducerType): MapStateProps => {
+let mapStateToProps = (state: RootReducerType): MapPropsType => {
 
     return {
         post: getPost(state),
@@ -68,7 +74,8 @@ let mapStateToProps = (state: RootReducerType): MapStateProps => {
         profile: getProfile(state),
         generalId: getOwnUserId(state),
         emailUser: emailUser(state),
-        photoUser: state.general.photo
+        photoUser: state.general.photo,
+        totalCountFriend: getTotalCountFriend(state)
 
     }
 }
@@ -76,13 +83,13 @@ let mapStateToProps = (state: RootReducerType): MapStateProps => {
 export default compose<React.ComponentType>(
     withRouter,
     withAuthRedirect,
-    connect<MapStateProps, MapDistpathProps, OwnStateProps, RootReducerType>(mapStateToProps,
+    connect<MapPropsType, MapDistpathProps, OwnStateProps, RootReducerType>(mapStateToProps,
         {  addPost, setUsers, statusСhangedSuccess, saveFoto })
 )(ProfileConteiner)
 export type WriteNewPostType = { writeNewPost: string}
-type MapStateProps = {
+type MapPropsType = {
     post: Array<PostType>, brief: BriefType, placeholder: string, profile: ProfileType, generalId: number | null
-    status: string, emailUser: string | null, photoUser: PhotosType,
+    status: string, emailUser: string | null, photoUser: PhotosType, totalCountFriend: number
 
 }
 type MapDistpathProps = {
@@ -90,16 +97,19 @@ type MapDistpathProps = {
     addPost: (writeNewPost: string) => void
     statusСhangedSuccess: (status: string) => void
     saveFoto: (file: File) => void
+ 
 }
 type OwnStateProps = {
     onSubmit: (values: any) => void
     isMyPage: boolean | null
-    userProfileId: number | null    
+    userProfileId: number | null 
+   
 }
 type MapParamsTypes = {
     userId: string 
+     
 }
-type PropsType =    MapStateProps  &  MapDistpathProps  &   RouteComponentProps<MapParamsTypes> //type match react-router-dom
+type PropsType =    MapPropsType  &  MapDistpathProps  &   RouteComponentProps<MapParamsTypes> //type match react-router-dom
  
 
 

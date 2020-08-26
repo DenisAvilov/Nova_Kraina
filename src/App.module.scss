@@ -1,0 +1,17 @@
+.grid{
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 300px 1fr 300px;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas:  
+                        "h h h"
+                        "al m ar"
+                        
+    ;
+ &_header{
+    grid-area: h;
+ }
+ &_left{grid-area: al;}
+ &_right{grid-area: ar;}
+ &_main{grid-area: m;}
+}

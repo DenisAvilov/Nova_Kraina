@@ -7,11 +7,12 @@ import { Route, Switch, useRouteMatch, useParams } from 'react-router-dom';
 import ProfilePage from './ProfilePage';
 import AboutContainer from '../about/AboutContainer';
 import { WriteNewPostType } from './ProfileContainer';
+import FriendContainer from '../friend/FriendContainer';
 
 type PropsType ={      
     post: Array<PostType>, profile: ProfileType, brief:  BriefType,
     placeholder: string,  isMyPage: boolean | null, status: string 
-    emailUser: string | null, photoUser: PhotosType    
+    emailUser: string | null, photoUser: PhotosType   , totalCountFriend: number 
 }
 type ProfileDistpactPropsType = {
     saveFoto: (file: File) => void
@@ -19,6 +20,41 @@ type ProfileDistpactPropsType = {
     onSubmit: any
     addPost: (writeNewPost: string)=> void   
 }
+
+
+const Profile:React.FC<PropsType & ProfileDistpactPropsType> = (props: PropsType & ProfileDistpactPropsType) => { 
+ let {emailUser ,isMyPage, status, statusСhangedSuccess, photoUser, saveFoto,
+   profile, addPost, brief, profile:{photos}, onSubmit, post, totalCountFriend } = props
+
+ let {path} = useRouteMatch();
+
+    return (<div className={d.wrap}>        
+            <User userData={profile} isMyPage={isMyPage} status={status} statusСhangedSuccess={statusСhangedSuccess} saveFoto={saveFoto}/>
+            <ProfileUserNavigation  emailUser={emailUser} totalCountFriend={totalCountFriend} />        
+            <Switch> 
+               <Route exact path={`${path}`}  render={() =>
+                    <ProfilePage brief={brief} photoUser={photoUser}  post={post} onSubmit={onSubmit}  addPost={addPost} /> }/>   
+                    <Route path={`${path}/about`} render={() => <AboutContainer isMyPage={isMyPage} />} /> 
+                    <Route path={`${path}/about_overview`} render={() => <AboutContainer isMyPage={isMyPage} />} />  
+                    <Route path={`${path}/friends`} render={() => <FriendContainer />} />  
+                    
+               {/*         <Route path={`${path}/about_work_and_education`} render={() => <AboutContainer isMyPage={isMyPage}/>} />    */}
+
+                  {/* {routes.map((route, index) => (    <Route 
+                    key={index}
+                    path={`${path}`+ route.path}                   
+                    children={<route.sidebar />}
+                   />  
+              ))}     */}
+
+            </Switch>
+           
+          </div> 
+    )
+}
+export default Profile;
+
+
 // export const routes = [
    
 //     {
@@ -37,34 +73,3 @@ type ProfileDistpactPropsType = {
     
 //     }
 //   ];
-
-const Profile:React.FC<PropsType & ProfileDistpactPropsType> = (props: PropsType & ProfileDistpactPropsType) => { 
- let {emailUser ,isMyPage, status, statusСhangedSuccess, photoUser, saveFoto,
-   profile, addPost, brief, profile:{photos}, onSubmit, post} = props
-
- let {path} = useRouteMatch();
-
-    return (<div className={d.wrap}>
-        
-            <User userData={profile} isMyPage={isMyPage} status={status} statusСhangedSuccess={statusСhangedSuccess} saveFoto={saveFoto}/>
-            <ProfileUserNavigation  emailUser={emailUser}  />        
-            <Switch> 
-               <Route exact path={`${path}`}  render={() =>
-                    <ProfilePage brief={brief} photoUser={photoUser}  post={post} onSubmit={onSubmit}  addPost={addPost} /> }/>   
-                    <Route path={`${path}/about`} render={() => <AboutContainer isMyPage={isMyPage} />} /> 
-                    <Route path={`${path}/about_overview`} render={() => <AboutContainer isMyPage={isMyPage} />} />  
-               {/*         <Route path={`${path}/about_work_and_education`} render={() => <AboutContainer isMyPage={isMyPage}/>} />    */}
-
-                  {/* {routes.map((route, index) => (    <Route 
-                    key={index}
-                    path={`${path}`+ route.path}                   
-                    children={<route.sidebar />}
-                   />  
-              ))}     */}
-
-            </Switch>
-           
-          </div> 
-    )
-}
-export default Profile;
