@@ -49,7 +49,7 @@ class ProfileConteiner extends React.Component<PropsType> {
     submit = (values: WriteNewPostType) => {
         let { addPost } = this.props
         addPost(values.writeNewPost)
-    }
+    } 
 
     render() {
         let { emailUser,  statusСhangedSuccess, saveFoto, photoUser, status } = this.props
