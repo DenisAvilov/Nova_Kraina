@@ -1,8 +1,6 @@
 
 # Nova kraina
 
-Creating a prototype tool for the implementation of their constitutional rights.
-[The idea is described on the page.](http://novakraina.pp.ua).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
